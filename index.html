@@ -415,6 +415,134 @@
 @media(max-width:520px){.reset-modal{padding:1.05rem}.reset-modal-actions{flex-direction:column-reverse}.reset-modal-actions button{width:100%}}
 </style>
 
+
+<style id="formula-no-scrollbar-final-fix">
+/* IMPORTANT FORMULAS — complete display, no horizontal scrollbar */
+.important-formula-grid {
+    width: 100%;
+    min-width: 0;
+}
+
+.important-formula-grid .formula-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.important-formula-grid .math-display {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.15rem;
+}
+
+.important-formula-grid mjx-container[jax="CHTML"] {
+    display: inline-block !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    white-space: nowrap;
+}
+
+/* Slightly smaller, but fully readable, formula sizing */
+.important-formula-grid .formula-primary {
+    font-size: clamp(1rem, 1.5vw, 1.34rem) !important;
+}
+
+.important-formula-grid .formula-secondary {
+    font-size: clamp(0.96rem, 1.35vw, 1.20rem) !important;
+}
+
+/* Standard deviation has a full row, so it may be slightly larger */
+.important-formula-grid .formula-card.md\:col-span-2 .formula-secondary {
+    font-size: clamp(1rem, 1.5vw, 1.28rem) !important;
+}
+
+@media (max-width: 767px) {
+    .important-formula-grid .formula-card {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .important-formula-grid .formula-primary {
+        font-size: clamp(0.92rem, 4.2vw, 1.12rem) !important;
+    }
+
+    .important-formula-grid .formula-secondary {
+        font-size: clamp(0.90rem, 4vw, 1.08rem) !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .important-formula-grid .formula-card {
+        padding-left: 0.55rem;
+        padding-right: 0.55rem;
+    }
+
+    .important-formula-grid .formula-primary,
+    .important-formula-grid .formula-secondary {
+        font-size: clamp(0.84rem, 3.7vw, 0.98rem) !important;
+    }
+}
+</style>
+
+
+<style id="binomial-compact-spacing">
+/* Reduce vertical gaps between the three binomial formula lines */
+.binomial-formula-stack {
+    gap: 0 !important;
+}
+.binomial-formula-stack .math-display {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+}
+.binomial-formula-stack mjx-container[display="true"] {
+    margin-top: 0.22em !important;
+    margin-bottom: 0.22em !important;
+}
+</style>
+
+
+<style id="binomial-mean-variance-compact">
+/* Compact Mean & Variance of Binomial Distribution */
+.binomial-mv-compact {
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.7rem !important;
+}
+.binomial-mv-compact .formula-card {
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    min-height: 0 !important;
+}
+.binomial-mv-compact .formula-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.05rem !important;
+}
+.binomial-mv-compact .math-display {
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 0 !important;
+}
+.binomial-mv-compact mjx-container[display="true"] {
+    margin-top: 0.12em !important;
+    margin-bottom: 0.12em !important;
+}
+</style>
+
+
+
+
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden">
 
@@ -480,6 +608,17 @@
             
             <div class="my-2 border-t border-gray-100"></div>
             
+                        <button id="nav-obt" type="button" onclick="navigateTo(\'sec-obt\'); updateNav(\'nav-obt\')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path>
+                </svg>
+                OPEN BOOK TEST
+                <span class="nav-status">Locked</span>
+            </button>
+
+            <div class="my-2 border-t border-gray-100"></div>
+
             <button id="nav-try" onclick="navigateTo('sec-try'); updateNav('nav-try')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
                 <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                 TRY
@@ -871,7 +1010,7 @@
                         Important Formulas
                     </div>
                     <div class="p-4 md:p-5">
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4">
+                        <div class="important-formula-grid grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                             <!-- Mean -->
                             <div class="formula-card">
                                 <div class="formula-bg-pattern"><span class="text-3xl font-serif">μ</span></div>
@@ -891,7 +1030,7 @@
                                 </div>
                             </div>
                             <!-- Standard Deviation -->
-                            <div class="formula-card lg:col-span-1 md:col-span-2">
+                            <div class="formula-card md:col-span-2">
                                 <div class="formula-bg-pattern"><span class="text-3xl font-serif">σ</span></div>
                                 <div class="formula-tag">FORMULA</div>
                                 <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Standard Deviation</h3>
@@ -1103,7 +1242,7 @@
                             <div class="formula-tag">FORMULA</div>
                             <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1.5 text-[#5B176D] text-center">Binomial Probability Formula</h3>
                             
-                            <div class="flex flex-col items-center justify-center space-y-3 mt-1">
+                            <div class="binomial-formula-stack flex flex-col items-center justify-center mt-0">
                                 <div class="math-display text-[#4A005E] font-bold formula-secondary">
                                     \[ X \sim B(n, p) \]
                                 </div>
@@ -1281,7 +1420,7 @@
                         Mean & Variance of Binomial Distribution
                     </div>
                     <div class="p-4 md:p-5">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="binomial-mv-compact grid grid-cols-1 md:grid-cols-2 gap-3">
                             <!-- Mean -->
                             <div class="formula-card">
                                 <div class="formula-bg-pattern"><span class="text-4xl font-serif">μ</span></div>
@@ -1309,6 +1448,60 @@
                 </div>
                 <div id="req-sec-3-3" class="requirement-note">Reveal all required binomial examples to continue.</div>
             </section>
+
+
+            
+            <!-- OPEN BOOK TEST -->
+            <section id="sec-obt" class="page-section">
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">OPEN BOOK TEST</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-1">Chapter 3 Open Book Test</h2>
+                        <p class="text-[#F4EAFE] text-[14px] md:text-[15px] opacity-95">
+                            Complete the Open Book Test before proceeding to TRY.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="playbook-card p-5 md:p-6">
+                    <div class="bg-[#FAF7FF] border border-[#E9D5FF] rounded-xl p-5 md:p-6 text-center">
+                        <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#F4EAFE] text-[#8610A8] mb-3">
+                            <svg class="w-7 h-7 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-[#3D0055] mb-2">Ready for the Open Book Test?</h3>
+                        <p class="text-sm text-gray-700 max-w-xl mx-auto mb-4">
+                            The test will open in this same browser tab. After submitting it, use your browser's
+                            <strong>Back</strong> button to return to this workbook.
+                        </p>
+
+                        <a id="btn-start-obt"
+                            href="https://quiz-quest-eight.lovable.app/"
+                            target="_self"
+                            onclick="prepareOpenBookTestLaunch()"
+                            class="inline-flex items-center justify-center w-full md:w-auto bg-[#8610A8] hover:bg-[#5B176D] text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm">
+                            Start Open Book Test →
+                        </a>
+                    </div>
+
+                    <div id="obt-return-panel" class="mt-4 bg-white border border-[#D8B4FE] rounded-xl p-4 hidden">
+                        <p class="text-sm text-gray-700 mb-3">
+                            Have you completed and submitted the Open Book Test?
+                        </p>
+                        <button id="btn-complete-obt" type="button" onclick="return window.completeOpenBookTest(event)"
+                            class="w-full md:w-auto bg-[#8610A8] hover:bg-[#5B176D] text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm">
+                            ✓ Yes, I Have Completed the Test
+                        </button>
+                        <p id="obt-completion-note" class="text-xs text-gray-500 mt-2">
+                            TRY will remain locked until completion is confirmed.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- TRY SECTION (FORMATIVE QUIZ) -->
             <section id="sec-try" class="page-section">
@@ -2082,16 +2275,16 @@
 <script id="progressive-locking-system">
 (function(){
   const KEY='chapter3InteractiveWorkbookProgressV1';
-  const sequence=['sec-start','sec-3-1','sec-3-2','sec-3-3','sec-try','sec-check'];
-  const progressSections=['sec-3-1','sec-3-2','sec-3-3','sec-try','sec-check'];
-  const navBySection={'sec-start':'nav-start','sec-3-1':'nav-3-1','sec-3-2':'nav-3-2','sec-3-3':'nav-3-3','sec-try':'nav-try','sec-check':'nav-check'};
+  const sequence=['sec-start','sec-3-1','sec-3-2','sec-3-3','sec-obt','sec-try','sec-check'];
+  const progressSections=['sec-3-1','sec-3-2','sec-3-3','sec-obt','sec-try','sec-check'];
+  const navBySection={'sec-start':'nav-start','sec-3-1':'nav-3-1','sec-3-2':'nav-3-2','sec-3-3':'nav-3-3','sec-obt':'nav-obt','sec-try':'nav-try','sec-check':'nav-check'};
   const requirements={
     'sec-3-1':['ex1-solution','ex2b-solution'],
     'sec-3-2':['ex3-s3','ex4-solution','ex5-solution'],
     'sec-3-3':['ex6-solution','ex7a-solution','ex7b-solution','ex7c-solution','ex7d-solution']
   };
 
-  let state={completed:[],revealed:[],tryCompleted:false,checkCompleted:false};
+  let state={completed:[],revealed:[],tryCompleted:false,checkCompleted:false,obtCompleted:false,obtLaunched:false};
   try{
     const saved=JSON.parse(localStorage.getItem(KEY));
     if(saved) state={...state,...saved};
@@ -2115,6 +2308,66 @@
     clearTimeout(window.__chapterToast);
     window.__chapterToast=setTimeout(()=>el.classList.remove('show'),2400);
   }
+
+  function showToastMessage(message){
+    let el=document.getElementById('progressive-custom-toast');
+    if(!el){
+      el=document.createElement('div');
+      el.id='progressive-custom-toast';
+      el.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99999;background:#3D0055;color:white;padding:10px 16px;border-radius:10px;font-weight:700;font-size:13px;box-shadow:0 8px 24px rgba(61,0,85,.22);';
+      document.body.appendChild(el);
+    }
+    el.textContent=message;
+    el.style.display='block';
+    clearTimeout(window.__progressiveToastTimer);
+    window.__progressiveToastTimer=setTimeout(()=>{el.style.display='none';},2600);
+  }
+  window.prepareOpenBookTestLaunch=function(){
+    if(!state.completed.includes('sec-3-3')){
+      toast('lock');
+      return false;
+    }
+    state.obtLaunched=true;
+    save();
+
+    // Remember the workbook section so returning with the browser Back button
+    // restores the Open Book Test screen.
+    try{
+      sessionStorage.setItem('chapter3ReturnSection','sec-obt');
+    }catch(e){}
+    return true;
+  };
+
+  window.completeOpenBookTest=function(){
+    if(!state.completed.includes('sec-3-3')){
+      toast('lock');
+      return false;
+    }
+
+    state.obtCompleted=true;
+    state.obtLaunched=true;
+    if(!state.completed.includes('sec-obt'))state.completed.push('sec-obt');
+
+    save();
+    updateUI();
+
+    const btn=document.getElementById('btn-complete-obt');
+    const note=document.getElementById('obt-completion-note');
+
+    if(btn){
+      btn.textContent='Continue to TRY →';
+      btn.onclick=function(e){
+        if(e)e.preventDefault();
+        window.navigateTo('sec-try');
+        window.updateNav('nav-try');
+        return false;
+      };
+    }
+
+    if(note)note.textContent='✓ Open Book Test completed. TRY is now unlocked.';
+    showToastMessage('✓ Open Book Test completed — TRY unlocked');
+    return false;
+  };
 
   function updateUI(){
     sequence.forEach(id=>{
@@ -2150,7 +2403,63 @@
       }
     });
 
-    const done=progressSections.filter(id=>state.completed.includes(id)).length;
+    const obtBtn=document.getElementById('btn-complete-obt');
+    const obtNote=document.getElementById('obt-completion-note');
+    const obtReturnPanel=document.getElementById('obt-return-panel');
+    const obtStartBtn=document.getElementById('btn-start-obt');
+
+    if(obtReturnPanel){
+      if(state.obtLaunched || state.obtCompleted){
+        obtReturnPanel.classList.remove('hidden');
+      }else{
+        obtReturnPanel.classList.add('hidden');
+      }
+    }
+
+    if(obtStartBtn){
+      if(state.obtCompleted){
+        obtStartBtn.textContent='Open Book Test Completed ✓';
+        obtStartBtn.removeAttribute('href');
+        obtStartBtn.removeAttribute('onclick');
+        obtStartBtn.setAttribute('aria-disabled','true');
+        obtStartBtn.classList.add('opacity-60','cursor-not-allowed','pointer-events-none');
+      }else{
+        obtStartBtn.textContent=state.obtLaunched?'Open Test Again →':'Start Open Book Test →';
+        obtStartBtn.href='https://quiz-quest-eight.lovable.app/';
+        obtStartBtn.target='_self';
+        obtStartBtn.setAttribute('onclick','prepareOpenBookTestLaunch()');
+        obtStartBtn.removeAttribute('aria-disabled');
+        obtStartBtn.classList.remove('opacity-60','cursor-not-allowed','pointer-events-none');
+      }
+    }
+    if(obtBtn){
+      if(state.obtCompleted){
+        obtBtn.textContent='Continue to TRY →';
+        obtBtn.onclick=function(e){
+          if(e)e.preventDefault();
+          window.navigateTo('sec-try');
+          window.updateNav('nav-try');
+          return false;
+        };
+        if(obtNote)obtNote.textContent='Completed. TRY is now unlocked.';
+      }else{
+        obtBtn.textContent='✓ I Have Completed the Open Book Test';
+        obtBtn.onclick=window.completeOpenBookTest;
+        if(obtNote)obtNote.textContent='TRY will remain locked until this step is completed.';
+      }
+    }
+
+    // OPEN BOOK TEST is compulsory before TRY.
+    const tryNav=document.getElementById('nav-try');
+    if(tryNav && !state.obtCompleted){
+      tryNav.classList.remove('nav-completed');
+      tryNav.classList.add('nav-locked');
+      tryNav.setAttribute('aria-disabled','true');
+      const tryStatus=tryNav.querySelector('.nav-status');
+      if(tryStatus)tryStatus.textContent='Locked';
+    }
+
+    const done=progressSections.filter(id=>id==='sec-obt'?state.obtCompleted:state.completed.includes(id)).length;
     const pct=Math.round(done/progressSections.length*100);
     const bar=document.getElementById('progress-bar');
     const txt=document.getElementById('progress-text');
@@ -2182,6 +2491,14 @@
   };
 
   window.navigateTo=function(id){
+    if(id==='sec-obt' && !state.completed.includes('sec-3-3')){
+      toast('lock');
+      return false;
+    }
+    if((id==='sec-try'||id==='sec-check') && !state.obtCompleted){
+      toast('lock');
+      return false;
+    }
     if(!isUnlocked(id)){toast('lock');return false;}
     document.querySelectorAll('.page-section').forEach(sec=>sec.classList.remove('active'));
     const sec=document.getElementById(id);
@@ -2195,6 +2512,8 @@
 
   window.updateNav=function(navId){
     const id=Object.keys(navBySection).find(k=>navBySection[k]===navId);
+    if(id==='sec-obt' && !state.completed.includes('sec-3-3')){toast('lock');return false;}
+    if((id==='sec-try'||id==='sec-check') && !state.obtCompleted){toast('lock');return false;}
     if(id&&!isUnlocked(id)){toast('lock');return false;}
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
     const nav=document.getElementById(navId);
@@ -2278,7 +2597,7 @@
   };
   window.confirmResetProgress=function(){
     localStorage.removeItem(KEY);
-    state={completed:[],revealed:[],tryCompleted:false,checkCompleted:false};
+    state={completed:[],revealed:[],tryCompleted:false,checkCompleted:false,obtCompleted:false,obtLaunched:false};
 
     const revealIds=[
       'ex1-hint2','ex1-solution','ex2a-hint2','ex2a-solution','ex2b-solution',
@@ -2320,6 +2639,51 @@
 
   updateUI();
 })();
+</script>
+
+
+
+
+
+<script id="github-obt-return-restore">
+window.addEventListener('pageshow', function () {
+    try {
+        const section = sessionStorage.getItem('chapter3ReturnSection');
+        if (section === 'sec-obt') {
+            sessionStorage.removeItem('chapter3ReturnSection');
+            setTimeout(function () {
+                if (typeof navigateTo === 'function') navigateTo('sec-obt');
+                if (typeof updateNav === 'function') updateNav('nav-obt');
+            }, 120);
+        }
+    } catch (e) {}
+});
+</script>
+
+
+<script id="obt-completion-button-final-binding">
+window.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('btn-complete-obt');
+    if (!btn) return;
+
+    btn.addEventListener('click', function (event) {
+        // If already completed, go directly to TRY.
+        try {
+            if (typeof state !== 'undefined' && state.obtCompleted) {
+                event.preventDefault();
+                if (typeof window.navigateTo === 'function') window.navigateTo('sec-try');
+                if (typeof window.updateNav === 'function') window.updateNav('nav-try');
+                return;
+            }
+        } catch (e) {}
+
+        // Otherwise complete OBT.
+        if (typeof window.completeOpenBookTest === 'function') {
+            event.preventDefault();
+            window.completeOpenBookTest(event);
+        }
+    });
+});
 </script>
 
 </body>
