@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pre-Class Playbook: Chapter 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for rendering mathematics -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1,
+                minScale: 0.8
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF7FF; /* Very light purple/white */
+            color: #172033;
+            overscroll-behavior-y: none;
+        }
+
+        /* Page Transitions */
+        .page-section {
+            display: none;
+            animation: slideFadeIn 0.3s ease-out forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SAFE ICON CONSTRAINTS: Prevents massive SVG expansion */
+        .ui-icon {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        
+        /* Lock down specific header/button SVGs */
+        .card-concept-header svg, .nav-item svg, button svg {
+            flex-shrink: 0 !important;
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            max-width: 24px !important;
+            max-height: 24px !important;
+            display: inline-block !important;
+        }
+
+        /* Allow larger SVGs only in specific completion/end screens */
+        .large-icon {
+            flex-shrink: 0 !important;
+            width: 3rem !important;
+            height: 3rem !important;
+            max-width: 56px !important;
+            max-height: 56px !important;
+            display: inline-block !important;
+        }
+
+        /* CRITICAL MATHJAX FIX: Hide MathJax internal SVG cache */
+        #MathJax_SVG_Hidden, svg[id^="MathJax"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            pointer-events: none !important;
+        }
+
+        /* Allow actual mathematical formulas to render correctly */
+        mjx-container svg, .math-display svg {
+            display: inline-block !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: none !important;
+        }
+
+        /* Premium Playbook Cards */
+        .playbook-card {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #F3F4F6;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+
+        /* Card Sub-types */
+        .card-concept {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #F3F4F6;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+        .card-concept-header {
+            background-color: #FAF7FF;
+            color: #5B176D;
+            padding: 0.75rem 1.25rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-bottom: 1px solid #F3E8FF;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-example {
+            background-color: #FFFFFF;
+            border-left: 4px solid #8610A8;
+            padding: 1.25rem;
+            border-radius: 0 1rem 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            margin-bottom: 1.25rem;
+            border: 1px solid #F3F4F6;
+            border-left-width: 4px;
+        }
+
+        .card-hint {
+            background-color: #F4EAFE;
+            border-left: 4px solid #B944E3;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .card-think {
+            background-color: #F0F8FF;
+            border-left: 4px solid #0284C7;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .card-solution {
+            background-color: #FFFFFF;
+            border: 1px solid #D8B4FE;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(134, 16, 168, 0.05);
+        }
+        
+        .card-takeaway {
+            background-color: #FAF7FF;
+            border-left: 4px solid #5B176D;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-top: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            font-weight: 500;
+            color: #4A005E;
+        }
+
+        /* Formula Cards - Monochromatic Premium Style */
+        .formula-card {
+            position: relative;
+            background-color: #FAF7FF;
+            border: 1px solid #D8B4FE;
+            border-left: 4px solid #8610A8;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 4px 12px rgba(74, 0, 94, 0.05);
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            overflow: visible;
+            height: auto;
+            transition: all 0.2s ease;
+        }
+        .formula-card:hover {
+            box-shadow: 0 6px 16px rgba(74, 0, 94, 0.08);
+            transform: translateY(-1px);
+            border-color: #C084FC;
+        }
+        .formula-tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #8610A8;
+            color: #FFFFFF;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        .formula-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            color: #8610A8;
+            pointer-events: none;
+            user-select: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        /* Navigation Styles */
+        .nav-item {
+            transition: all 0.2s ease;
+            border-radius: 10px;
+            margin-bottom: 0.25rem;
+            border-left: 4px solid transparent;
+            background-color: transparent;
+            color: #4B5563;
+        }
+
+        .nav-item.nav-active {
+            background-color: #E9D5FF !important;
+            color: #4A005E !important;
+            font-weight: 700 !important;
+            border-left-color: #8610A8 !important;
+            box-shadow: 0 2px 6px rgba(134,16,168,0.1);
+        }
+
+        .nav-item svg {
+            color: #7C8291;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.nav-active svg {
+            color: #8610A8 !important;
+        }
+
+        .nav-item:hover:not(.nav-active) {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        /* Quiz Option Base */
+        .quiz-opt-base {
+            background-color: #FFFFFF;
+            border: 2px solid #DDD6E8;
+            color: #374151;
+            transition: all 0.2s ease;
+            border-radius: 0.75rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .quiz-opt-base:hover:not(:disabled) {
+            background-color: #F4EAFE;
+            border-color: #C084FC;
+        }
+
+        /* Selected State */
+        .quiz-opt-selected {
+            background-color: #E9D5FF !important;
+            border-color: #8610A8 !important;
+            color: #4A005E !important;
+            box-shadow: 0 4px 6px -1px rgba(134, 16, 168, 0.1) !important;
+        }
+
+        /* Correct State */
+        .quiz-opt-correct {
+            background-color: #dcfce7 !important;
+            border-color: #15803d !important;
+            color: #166534 !important;
+        }
+
+        /* Incorrect State */
+        .quiz-opt-incorrect {
+            background-color: #fee2e2 !important;
+            border-color: #b91c1c !important;
+            color: #7f1d1d !important;
+        }
+
+        /* Math Display Constraints */
+        .math-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.15rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* Responsive Formula Sizing */
+        .formula-primary { font-size: clamp(1.15rem, 2vw, 1.75rem); }
+        .formula-secondary { font-size: clamp(1rem, 1.6vw, 1.25rem); }
+
+        /* Typography overrides */
+        .text-body {
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden">
+
+    <!-- Mobile Header -->
+    <div class="md:hidden bg-[#FFFFFF] border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-sm z-50">
+        <div class="font-bold text-[#5B176D] text-lg flex items-center">
+            <svg class="w-5 h-5 mr-2 ui-icon text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            Pre-Class Playbook
+        </div>
+        <button onclick="toggleSidebar()" class="text-[#3D0055] focus:outline-none p-2 bg-[#F4EAFE] rounded-lg">
+            <svg class="w-6 h-6 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="bg-white w-full md:w-72 flex-shrink-0 border-r border-gray-100 flex flex-col h-[calc(100vh-60px)] md:h-full absolute md:relative z-40 transition-transform transform -translate-x-full md:translate-x-0 shadow-xl md:shadow-none top-[60px] md:top-0">
+        <div class="p-5 border-b border-gray-100 hidden md:block">
+            <span class="text-[10px] font-bold text-[#B944E3] uppercase tracking-wider mb-1 block">PRE-CLASS WORKBOOK</span>
+            <h1 class="text-xl font-bold text-[#3D0055] leading-tight">Ch 3: Discrete<br>Probability</h1>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto p-3 md:p-4 space-y-1">
+            <button id="nav-start" onclick="navigateTo('sec-start'); updateNav('nav-start')" class="nav-item nav-active w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                START HERE
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+            <div class="my-2 border-t border-gray-100"></div>
+            
+            <button id="nav-3-1" onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                3.1 DISTRIBUTIONS
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+            <button id="nav-3-2" onclick="navigateTo('sec-3-2'); updateNav('nav-3-2')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                3.2 MEAN & VAR
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+            <button id="nav-3-3" onclick="navigateTo('sec-3-3'); updateNav('nav-3-3')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                3.3 BINOMIAL
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+            
+            <div class="my-2 border-t border-gray-100"></div>
+            
+            <button id="nav-try" onclick="navigateTo('sec-try'); updateNav('nav-try')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                TRY
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+            <button id="nav-check" onclick="navigateTo('sec-check'); updateNav('nav-check')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                CHECK
+                <span class="completion-tick hidden text-green-500 ml-auto font-bold">✓</span>
+            </button>
+        </nav>
+        
+        <div class="p-5 border-t border-gray-100 bg-gray-50">
+            <div class="flex justify-between text-xs font-bold text-gray-500 mb-2">
+                <span>PROGRESS</span>
+                <span id="progress-text" class="text-[#8610A8]">0%</span>
+            </div>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-[#8610A8] transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 overflow-y-auto bg-transparent p-4 md:p-8 relative scroll-smooth">
+        <div class="max-w-3xl mx-auto pb-20 md:pb-24">
+            
+            <!-- START HERE -->
+            <section id="sec-start" class="page-section active">
+                <div class="bg-gradient-to-r from-[#5B176D] to-[#8610A8] rounded-2xl p-6 md:p-10 text-white shadow-lg relative overflow-hidden mb-6">
+                    <div class="relative z-10">
+                        <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider mb-2 block">PRE-CLASS INTERACTIVE PLAYBOOK</span>
+                        <h1 class="text-3xl md:text-4xl font-bold mb-3 leading-tight">Chapter 3:<br>Discrete Probability</h1>
+                        <p class="text-[#F4EAFE] text-sm md:text-base max-w-xl leading-relaxed mb-6">Use this digital playbook before class to review the essential concepts of discrete probability. Work through the sections progressively to build your understanding.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6 text-xs font-bold text-[#F4EAFE] uppercase tracking-wider opacity-90">
+                            <span class="bg-white bg-opacity-20 px-2.5 py-1 rounded-md">1. LEARN</span>
+                            <span class="bg-white bg-opacity-20 px-2.5 py-1 rounded-md">2. TRY</span>
+                            <span class="bg-white bg-opacity-20 px-2.5 py-1 rounded-md">3. CHECK</span>
+                        </div>
+
+                        <button onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')" class="bg-white text-[#5B176D] hover:bg-[#F4EAFE] px-6 py-3 rounded-xl font-bold text-sm md:text-base shadow-sm transition-colors flex items-center w-full md:w-auto justify-center">
+                            START LEARNING
+                            <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                    <!-- Decorative Background -->
+                    <svg class="absolute right-0 top-0 h-full w-64 text-white opacity-5 transform translate-x-12 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"></path></svg>
+                </div>
+
+                <div class="playbook-card p-5 md:p-6">
+                    <h3 class="text-lg font-bold text-[#3D0055] mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 ui-icon text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Learning Outcomes
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+                        <div class="p-4 bg-[#FAF7FF] rounded-xl border border-[#F3E8FF]">
+                            <div class="font-bold text-[#5B176D] text-sm mb-1">3.1 Distributions</div>
+                            <ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+                                <li>Construct a probability distribution table.</li>
+                                <li>Show probability distributions graphically.</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-[#FAF7FF] rounded-xl border border-[#F3E8FF]">
+                            <div class="font-bold text-[#5B176D] text-sm mb-1">3.2 Mean & Variance</div>
+                            <ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+                                <li>Find the mean, variance and expected value.</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-[#FAF7FF] rounded-xl border border-[#F3E8FF] md:col-span-2">
+                            <div class="font-bold text-[#5B176D] text-sm mb-1">3.3 Binomial Distribution</div>
+                            <ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+                                <li>Use the binomial distribution as a model for solving problems.</li>
+                                <li>Use formulas for the mean, variance and expectation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LEARN: 3.1 -->
+            <section id="sec-3-1" class="page-section">
+                <!-- Section Header -->
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-1">3.1 Probability Distributions</h2>
+                        <p class="text-[#F4EAFE] text-[14px] md:text-[15px] opacity-95">Understand discrete random variables and construct probability distribution tables.</p>
+                    </div>
+                    <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+
+                <!-- Concept 1 -->
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Discrete Random Variable
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <p class="text-body mb-3">A discrete random variable is a random variable which takes a <strong>fixed number of countable values</strong>.</p>
+                        <p class="text-body mb-3">The <strong>probability distribution</strong> of a discrete random variable \( X \) is a list of all possible values of the random variable \( X \) and their corresponding probabilities.</p>
+                        <div class="bg-[#FAF7FF] border border-[#F3E8FF] rounded-lg p-3 text-sm text-[#5B176D]">
+                            <strong>Example:</strong> The number of balls taken from the box.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 1 -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <h3 class="font-bold text-[#3D0055] text-lg mb-2">Flipping 3 Coins</h3>
+                    <p class="text-body mb-4">Consider an experiment where 3 coins are flipped simultaneously. Let \( X \) denote the number of heads.</p>
+                    
+                    <div id="ex1-hint1" class="card-think">
+                        <div class="flex items-start">
+                            <span class="text-lg mr-2">💡</span>
+                            <div>
+                                <p class="font-bold text-sm text-[#0284C7] mb-0.5">Step 1: Identify all possible outcomes.</p>
+                                <p class="text-sm text-gray-700">If H denotes a head and T denotes a tail, what are all the combinations for 3 coins?</p>
+                            </div>
+                        </div>
+                        <button onclick="revealStep('ex1-hint2', this)" class="mt-3 text-[13px] font-bold text-[#0284C7] bg-white border border-[#BAE6FD] hover:bg-[#F0F9FF] px-4 py-1.5 rounded-lg transition-colors shadow-sm w-full md:w-auto text-center">Reveal Next Hint</button>
+                    </div>
+
+                    <div id="ex1-hint2" class="card-hint hidden">
+                        <div class="flex items-start">
+                            <span class="text-lg mr-2">💡</span>
+                            <div>
+                                <p class="font-bold text-sm text-[#B944E3] mb-0.5">Step 2: Count the outcomes for each value of \( X \).</p>
+                                <p class="text-sm text-gray-700">For example, TTT means 0 heads. HTT, TTH, and THT mean 1 head.</p>
+                            </div>
+                        </div>
+                        <button onclick="revealStep('ex1-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] transition-colors w-full md:w-auto text-center">Show Guided Solution</button>
+                    </div>
+
+                    <div id="ex1-solution" class="card-solution hidden">
+                        <h4 class="font-bold text-[#4A005E] border-b border-[#F3E8FF] pb-1.5 mb-3 text-sm uppercase tracking-wider">Solution</h4>
+                        
+                        <div class="overflow-x-auto mb-4">
+                            <table class="w-full text-left border-collapse text-sm bg-[#FAF7FF] rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr class="border-b border-[#E9D5FF]">
+                                        <th class="p-2 font-bold text-[#5B176D]">Possible outcomes</th>
+                                        <th class="p-2 font-bold text-[#5B176D]">Number of heads, \( X \)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-[#F3E8FF]"><td class="p-2">TTT</td><td class="p-2">0</td></tr>
+                                    <tr class="border-b border-[#F3E8FF]"><td class="p-2">HTT, TTH, THT</td><td class="p-2">1</td></tr>
+                                    <tr class="border-b border-[#F3E8FF]"><td class="p-2">THH, HHT, HTH</td><td class="p-2">2</td></tr>
+                                    <tr><td class="p-2">HHH</td><td class="p-2">3</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="font-bold text-gray-800 mb-2 text-sm">The probability distribution of \( X \) is:</p>
+                        <div class="overflow-x-auto mb-2">
+                            <table class="w-full max-w-sm text-center border-collapse text-sm bg-white border border-[#E9D5FF] shadow-sm rounded-lg">
+                                <tbody>
+                                    <tr class="border-b border-[#E9D5FF]">
+                                        <th class="p-2 font-bold text-[#5B176D] border-r border-[#E9D5FF] bg-[#FAF7FF]">\( X \)</th>
+                                        <td class="p-2 font-bold">0</td>
+                                        <td class="p-2 font-bold">1</td>
+                                        <td class="p-2 font-bold">2</td>
+                                        <td class="p-2 font-bold">3</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-2 font-bold text-[#5B176D] border-r border-[#E9D5FF] bg-[#FAF7FF]">\( P(X=x) \)</th>
+                                        <td class="p-2">\[ \frac{1}{8} \]</td>
+                                        <td class="p-2">\[ \frac{3}{8} \]</td>
+                                        <td class="p-2">\[ \frac{3}{8} \]</td>
+                                        <td class="p-2">\[ \frac{1}{8} \]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="card-takeaway mt-4 mb-0">
+                            <span class="text-xs font-bold uppercase tracking-wider mb-1 block text-[#5B176D]">⭐ GRAPHICAL REPRESENTATION</span>
+                            <p class="text-sm text-gray-700">Probability distributions are often shown as <strong>line graphs</strong> with \( X \) on the horizontal axis and \( P(X=x) \) on the vertical axis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Properties -->
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        Properties of Discrete Probability Distributions
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <p class="text-body mb-4">Every probability distribution must satisfy two mathematical rules:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            <!-- Rule 1 -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-3xl font-serif">Σ</span><span class="text-4xl font-serif">P</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Sum of Probabilities</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-primary">
+                                    \[ \sum P(X=x) = 1 \]
+                                </div>
+                            </div>
+                            <!-- Rule 2 -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-3xl font-serif">≤</span><span class="text-4xl font-serif">1</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Valid Range</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-primary">
+                                    \[ 0 \le P(X=x) \le 1 \]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2 -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <p class="text-body mb-2">A discrete random variable \( X \) has probability function</p>
+                    <div class="math-display bg-[#FAF7FF] p-3 rounded-lg border border-[#F3E8FF] mb-3 text-sm">
+                        \[
+                        P(X=x) = 
+                        \begin{cases} 
+                        bx, & x = 1, 2, 3, 4, 5 \\ 
+                        b(11-x), & x = 6, 7, 8, 9, 10 
+                        \end{cases}
+                        \]
+                    </div>
+                    <p class="font-bold text-[#3D0055] mb-2 text-sm">(a) Determine the value of the constant \( b \).</p>
+                    
+                    <div id="ex2a-hint1" class="card-think">
+                        <div class="flex items-start">
+                            <span class="text-lg mr-2">💡</span>
+                            <div>
+                                <p class="font-bold text-sm text-[#0284C7] mb-0.5">Think First</p>
+                                <p class="text-sm text-gray-700">What mathematical property must every probability distribution satisfy to help you find an unknown constant?</p>
+                            </div>
+                        </div>
+                        <button onclick="revealStep('ex2a-hint2', this)" class="mt-3 text-[13px] font-bold text-[#0284C7] bg-white border border-[#BAE6FD] hover:bg-[#F0F9FF] px-4 py-1.5 rounded-lg transition-colors shadow-sm w-full md:w-auto text-center">Reveal Next Hint</button>
+                    </div>
+
+                    <div id="ex2a-hint2" class="card-hint hidden">
+                        <p class="font-bold text-sm text-[#B944E3] mb-1">Hint: Add all possible probabilities</p>
+                        <div class="text-sm text-gray-700">Use the property: \[ \sum P(X=x) = 1 \]</div>
+                        <button onclick="revealStep('ex2a-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Show Solution (a)</button>
+                    </div>
+
+                    <div id="ex2a-solution" class="card-solution hidden">
+                        <h4 class="font-bold text-[#4A005E] border-b border-[#F3E8FF] pb-1 mb-2 text-sm uppercase tracking-wider">Solution (a)</h4>
+                        <div class="math-display text-sm">
+                            \[
+                            \begin{aligned}
+                            \sum_{x=1}^{10} P(X=x) &= 1 \\[4pt]
+                            [b(1) + \dots + b(5)] + [b(5) + \dots + b(1)] &= 1 \\[4pt]
+                            15b + 15b &= 1 \\[4pt]
+                            30b &= 1 \implies b = \frac{1}{30}
+                            \end{aligned}
+                            \]
+                        </div>
+                        
+                        <div class="mt-4 border-t border-gray-100 pt-3">
+                            <p class="font-bold text-[#3D0055] mb-2 text-sm">(b) Calculate \( P(|X-1| < 2) \).</p>
+                            
+                            <div id="ex2b-hint1" class="card-think">
+                                <p class="font-bold text-sm text-[#0284C7] mb-1">💡 Think First</p>
+                                <p class="text-sm text-gray-700">Before calculating the probability, determine which values of \( X \) satisfy the inequality \( |X-1| < 2 \).</p>
+                                <button onclick="revealStep('ex2b-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Show Solution (b)</button>
+                            </div>
+
+                            <div id="ex2b-solution" class="hidden mt-3">
+                                <div class="math-display bg-[#FAF7FF] p-3 rounded-lg text-sm">
+                                    \[
+                                    \begin{aligned}
+                                    P(|X-1| < 2) &= P(-2 < X-1 < 2) \\[3pt]
+                                    &= P(-1 < X < 3)
+                                    \end{aligned}
+                                    \]
+                                </div>
+                                <p class="text-sm text-gray-700 mt-2 mb-2">Since \( X \) takes discrete values starting from 1, the values satisfying \( -1 < X < 3 \) are <strong>1 and 2</strong>.</p>
+                                <div class="math-display text-sm">
+                                    \[
+                                    \begin{aligned}
+                                    P(X=1) + P(X=2) &= \frac{1}{30} + \frac{2}{30} = \frac{3}{30} = \frac{1}{10}
+                                    \end{aligned}
+                                    \]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LEARN: 3.2 -->
+            <section id="sec-3-2" class="page-section">
+                <!-- Section Header -->
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-1">3.2 Mean, Variance & Expectation</h2>
+                        <p class="text-[#F4EAFE] text-[14px] md:text-[15px] opacity-95">Find the expected value, variance and standard deviation of a discrete random variable.</p>
+                    </div>
+                    <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                </div>
+
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        Important Formulas
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-4">
+                            <!-- Mean -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-3xl font-serif">μ</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Mean / Expectation</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-secondary">
+                                    \[ \mu = E(X) = \sum xP(X=x) \]
+                                </div>
+                            </div>
+                            <!-- Variance -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-3xl font-serif">σ²</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Variance</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-secondary">
+                                    \[ \sigma^2 = \sum x^2 P(X=x) - \mu^2 \]
+                                </div>
+                            </div>
+                            <!-- Standard Deviation -->
+                            <div class="formula-card lg:col-span-1 md:col-span-2">
+                                <div class="formula-bg-pattern"><span class="text-3xl font-serif">σ</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Standard Deviation</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-secondary">
+                                    \[ \sigma = \sqrt{\operatorname{Var}(X)} \]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 1: 3 Coins -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <p class="text-body mb-3 font-medium">If 3 coins are tossed, find the mean, variance and standard deviation of the number of tails that occur.</p>
+                    
+                    <div id="ex3-hint1" class="card-hint">
+                        <p class="font-bold text-sm text-[#B944E3] mb-1">💡 Hint 1</p>
+                        <p class="text-sm text-gray-700">What values can \( X \), the number of tails, take?</p>
+                        <button onclick="revealStep('ex3-hint2', this)" class="mt-2 text-[13px] font-bold text-[#8610A8] hover:underline">Show Next Hint →</button>
+                    </div>
+
+                    <div id="ex3-hint2" class="card-hint hidden mt-2">
+                        <p class="font-bold text-sm text-[#B944E3] mb-1">💡 Hint 2</p>
+                        <p class="text-sm text-gray-700">Construct the probability distribution of \( X \) first.</p>
+                        <button onclick="revealStep('ex3-hint3', this)" class="mt-2 text-[13px] font-bold text-[#8610A8] hover:underline">Show Final Hint →</button>
+                    </div>
+
+                    <div id="ex3-hint3" class="card-hint hidden mt-2">
+                        <p class="font-bold text-sm text-[#B944E3] mb-1">💡 Hint 3</p>
+                        <p class="text-sm text-gray-700">Once the distribution is complete, calculate \( \sum xP(X=x) \).</p>
+                        <button onclick="revealStep('ex3-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Show Guided Solution</button>
+                    </div>
+
+                    <div id="ex3-solution" class="card-solution hidden mt-3">
+                        <h4 class="font-bold text-[#4A005E] border-b border-[#F3E8FF] pb-1 mb-3 text-sm uppercase tracking-wider">Solution Steps</h4>
+                        
+                        <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 1 & 2: Define X and Distribution</p>
+                        <div class="overflow-x-auto mb-3">
+                            <table class="w-full max-w-sm text-center border-collapse text-sm bg-white border border-[#E9D5FF] rounded-lg">
+                                <tbody>
+                                    <tr class="border-b border-[#E9D5FF]">
+                                        <th class="p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]">\( X \)</th>
+                                        <td class="p-1.5">0</td><td class="p-1.5">1</td><td class="p-1.5">2</td><td class="p-1.5">3</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]">\( P(X=x) \)</th>
+                                        <td class="p-1.5">\( \frac{1}{8} \)</td><td class="p-1.5">\( \frac{3}{8} \)</td><td class="p-1.5">\( \frac{3}{8} \)</td><td class="p-1.5">\( \frac{1}{8} \)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button id="btn-ex3-s2" onclick="revealStep('ex3-s2', this)" class="mb-3 bg-[#F4EAFE] hover:bg-[#E9D5FF] text-[#5B176D] border border-[#D8B4FE] px-4 py-2 rounded-lg text-sm font-bold transition-colors w-full">Next Step: Calculate Mean →</button>
+                        
+                        <div id="ex3-s2" class="hidden mb-3">
+                            <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 3: Calculate Mean (Expected Value)</p>
+                            <div class="math-display bg-[#FAF7FF] p-3 rounded-lg text-sm mb-3">
+                                \[
+                                \begin{aligned}
+                                E(X) = \mu &= \sum xP(X=x) \\[3pt]
+                                &= 0\left(\frac{1}{8}\right) + 1\left(\frac{3}{8}\right) + 2\left(\frac{3}{8}\right) + 3\left(\frac{1}{8}\right) \\[3pt]
+                                &= \frac{12}{8} = 1.5
+                                \end{aligned}
+                                \]
+                            </div>
+                            <button id="btn-ex3-s3" onclick="revealStep('ex3-s3', this)" class="bg-[#F4EAFE] hover:bg-[#E9D5FF] text-[#5B176D] border border-[#D8B4FE] px-4 py-2 rounded-lg text-sm font-bold transition-colors w-full">Next Step: Calculate Variance →</button>
+                        </div>
+
+                        <div id="ex3-s3" class="hidden">
+                            <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 4 & 5: Calculate E(X²) & Variance</p>
+                            <div class="math-display mb-2 text-sm">
+                                \[
+                                \begin{aligned}
+                                E(X^2) &= \sum x^2 P(X=x) \\[3pt]
+                                &= 0^2\left(\frac{1}{8}\right) + 1^2\left(\frac{3}{8}\right) + 2^2\left(\frac{3}{8}\right) + 3^2\left(\frac{1}{8}\right) = 3
+                                \end{aligned}
+                                \]
+                            </div>
+                            <div class="math-display bg-[#FAF7FF] p-3 rounded-lg mb-3 text-sm">
+                                \[
+                                \begin{aligned}
+                                \operatorname{Var}(X) &= E(X^2) - [E(X)]^2 \\[3pt]
+                                &= 3 - (1.5)^2 = 0.75
+                                \end{aligned}
+                                \]
+                            </div>
+                            <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 6: Standard Deviation</p>
+                            <div class="math-display font-bold text-[#8610A8] text-sm">
+                                \[ \sigma = \sqrt{0.75} \approx 0.866 \]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Table with C -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <p class="text-body mb-3">The probability distribution of the discrete random variable \( X \) is given as follows:</p>
+                    
+                    <div class="overflow-x-auto mb-3">
+                        <table class="w-full max-w-md text-center border-collapse text-sm bg-white border border-[#E9D5FF] rounded-lg">
+                            <tbody>
+                                <tr class="border-b border-[#E9D5FF]">
+                                    <th class="p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]">\( X \)</th>
+                                    <td class="p-1.5">1</td><td class="p-1.5">2</td><td class="p-1.5">3</td><td class="p-1.5">4</td><td class="p-1.5">5</td>
+                                </tr>
+                                <tr>
+                                    <th class="p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]">\( P(X=x) \)</th>
+                                    <td class="p-1.5">0.4</td><td class="p-1.5 font-bold text-[#8610A8]">C</td><td class="p-1.5">0.1</td><td class="p-1.5">0.09</td><td class="p-1.5">0.06</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="font-bold text-[#3D0055] mb-3 text-sm">Find \( E(X) \).</p>
+
+                    <div id="ex4-hint" class="card-think">
+                        <p class="font-bold text-sm text-[#0284C7] mb-1">💡 Think First</p>
+                        <p class="text-sm text-gray-700">Before calculating \( E(X) \), what missing information must you determine?</p>
+                        <button onclick="revealStep('ex4-hint2', this)" class="mt-2 text-[13px] font-bold text-[#0284C7] hover:underline">Show Hint →</button>
+                    </div>
+
+                    <div id="ex4-hint2" class="card-hint hidden mt-2">
+                        <p class="text-sm text-gray-700">Remember that the sum of all probabilities must equal 1.</p>
+                        <button onclick="revealStep('ex4-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Reveal Next Step</button>
+                    </div>
+
+                    <div id="ex4-solution" class="card-solution hidden mt-3">
+                        <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 1: Find C</p>
+                        <div class="math-display mb-3 text-sm">
+                            \[
+                            \begin{aligned}
+                            \sum P(X=x) &= 1 \\[3pt]
+                            0.4 + C + 0.1 + 0.09 + 0.06 &= 1 \\[3pt]
+                            0.65 + C &= 1 \implies C = 0.35
+                            \end{aligned}
+                            \]
+                        </div>
+                        <p class="font-bold text-xs text-[#5B176D] mb-1.5 uppercase tracking-wider">Step 2: Calculate E(X)</p>
+                        <div class="math-display bg-[#FAF7FF] p-3 rounded-lg text-sm">
+                            \[
+                            \begin{aligned}
+                            E(X) &= \sum xP(X=x) \\[3pt]
+                            &= 1(0.4) + 2(0.35) + 3(0.1) + 4(0.09) + 5(0.06) \\[3pt]
+                            &= 2.06
+                            \end{aligned}
+                            \]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Sofia -->
+                <div class="card-example mb-0">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Expected Monetary Value</span>
+                    <p class="text-body mb-3">The probability that Sofia will win a game is 0.01, so the probability that she will not win is 0.99. If Sofia wins, she will be given RM100, while if she loses, she must pay RM5. If \( X \) represents the amount that Sofia wins, what is the expected value of \( X \)? Interpret your result.</p>
+                    
+                    <button onclick="revealStep('ex5-solution', this)" class="bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Show Solution</button>
+
+                    <div id="ex5-solution" class="card-solution hidden mt-3">
+                        <div class="math-display mb-2 text-sm">
+                            \[
+                            \begin{aligned}
+                            E(X) &= \sum xP(X=x) \\[3pt]
+                            &= (100)(0.01) + (-5)(0.99) \\[3pt]
+                            &= 1 - 4.95 = -3.95
+                            \end{aligned}
+                            \]
+                        </div>
+                        <div class="card-takeaway mt-3 mb-0">
+                            <span class="text-xs font-bold uppercase tracking-wider mb-1 block">🧠 Interpret Your Answer</span>
+                            <p class="text-sm">The negative expected value means that if the game is played many times, Sofia is expected to <strong>lose RM3.95 on average per game</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LEARN: 3.3 -->
+            <section id="sec-3-3" class="page-section">
+                <!-- Section Header -->
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mb-1">3.3 Binomial Distribution</h2>
+                        <p class="text-[#F4EAFE] text-[14px] md:text-[15px] opacity-95">Use the binomial distribution as a model for solving problems.</p>
+                    </div>
+                    <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        Requirements & Formula
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <p class="font-bold text-gray-800 mb-2 text-sm">A binomial experiment satisfies 4 requirements:</p>
+                        <ol class="list-decimal pl-5 space-y-1 text-sm text-gray-700 mb-4">
+                            <li>Fixed number of trials (\( n \)).</li>
+                            <li>Only 2 possible outcomes (Success or Failure).</li>
+                            <li>Independent trials.</li>
+                            <li>Constant probability of success (\( p \)).</li>
+                        </ol>
+
+                        <div class="formula-card">
+                            <div class="formula-bg-pattern"><span class="text-4xl font-serif">B</span></div>
+                            <div class="formula-tag">FORMULA</div>
+                            <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1.5 text-[#5B176D] text-center">Binomial Probability Formula</h3>
+                            
+                            <div class="flex flex-col items-center justify-center space-y-3 mt-1">
+                                <div class="math-display text-[#4A005E] font-bold formula-secondary">
+                                    \[ X \sim B(n, p) \]
+                                </div>
+                                <div class="math-display text-[#4A005E] font-bold formula-primary">
+                                    \[ P(X=r) = \binom{n}{r} p^r q^{n-r} \]
+                                </div>
+                                <div class="math-display text-[#5B176D] font-bold text-sm">
+                                    \[ q = 1 - p \]
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-sm text-left text-gray-700 bg-[#FAF7FF] p-3 rounded-lg border border-[#F3E8FF]">
+                            <div class="grid grid-cols-2 gap-y-1.5">
+                                <div>\( n = \) number of trials</div>
+                                <div>\( p = \) probability of success</div>
+                                <div>\( q = \) probability of failure</div>
+                                <div>\( r = \) number of successes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 1: Dice -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <p class="text-body mb-3">A die is thrown 3 times. Find the probability of getting the number '5' exactly once.</p>
+                    
+                    <div id="ex6-hint1" class="card-think">
+                        <p class="font-bold text-sm text-[#0284C7] uppercase tracking-wider mb-2">Identify the parameters</p>
+                        <div class="grid grid-cols-4 gap-2 text-center font-mono text-sm font-bold mb-3">
+                            <div class="bg-white py-1.5 rounded shadow-sm border border-[#BAE6FD] text-[#0284C7]">n=?</div>
+                            <div class="bg-white py-1.5 rounded shadow-sm border border-[#BAE6FD] text-[#0284C7]">p=?</div>
+                            <div class="bg-white py-1.5 rounded shadow-sm border border-[#BAE6FD] text-[#0284C7]">q=?</div>
+                            <div class="bg-white py-1.5 rounded shadow-sm border border-[#BAE6FD] text-[#0284C7]">r=?</div>
+                        </div>
+                        <button onclick="revealStep('ex6-hint2', this)" class="text-[13px] font-bold text-[#0284C7] hover:underline">Show Hint 1 →</button>
+                    </div>
+
+                    <div id="ex6-hint2" class="card-hint hidden mt-2">
+                        <p class="text-sm text-gray-700"><strong>Hint 1:</strong> How many times is the die thrown?</p>
+                        <button onclick="revealStep('ex6-hint3', this)" class="mt-2 text-[13px] font-bold text-[#B944E3] hover:underline">Show Hint 2 →</button>
+                    </div>
+
+                    <div id="ex6-hint3" class="card-hint hidden mt-2">
+                        <p class="text-sm text-gray-700"><strong>Hint 2:</strong> What is the probability of obtaining a '5' on one throw? This is \( p \).</p>
+                        <button onclick="revealStep('ex6-hint4', this)" class="mt-2 text-[13px] font-bold text-[#B944E3] hover:underline">Show Hint 3 →</button>
+                    </div>
+                    
+                    <div id="ex6-hint4" class="card-hint hidden mt-2">
+                        <p class="text-sm text-gray-700"><strong>Hint 3:</strong> The phrase "exactly once" tells you the value of \( r \).</p>
+                        <button onclick="revealStep('ex6-solution', this)" class="mt-3 bg-[#8610A8] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#5B176D] w-full md:w-auto text-center">Show Guided Solution</button>
+                    </div>
+
+                    <div id="ex6-solution" class="card-solution hidden mt-3">
+                        <div class="grid grid-cols-4 gap-2 text-center text-sm font-bold mb-4">
+                            <div class="bg-[#F4EAFE] text-[#4A005E] py-1.5 rounded border border-[#D8B4FE]">n=3</div>
+                            <div class="bg-[#F4EAFE] text-[#4A005E] py-1.5 rounded border border-[#D8B4FE]">p=1/6</div>
+                            <div class="bg-[#F4EAFE] text-[#4A005E] py-1.5 rounded border border-[#D8B4FE]">q=5/6</div>
+                            <div class="bg-[#F4EAFE] text-[#4A005E] py-1.5 rounded border border-[#D8B4FE]">r=1</div>
+                        </div>
+                        
+                        <div class="math-display bg-[#FAF7FF] p-3 rounded-lg text-sm">
+                            \[
+                            \begin{aligned}
+                            P(X=1) &= \binom{3}{1} \left(\frac{1}{6}\right)^1 \left(\frac{5}{6}\right)^2 \\[4pt]
+                            &= 3 \left(\frac{1}{6}\right) \left(\frac{25}{36}\right) \\[4pt]
+                            &= \frac{25}{72} \approx 0.3472
+                            \end{aligned}
+                            \]
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept: Probability Language -->
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+                        Probability Language Translation
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                            <div class="flex justify-between items-center border-b border-[#F3E8FF] pb-1.5"><span class="font-bold text-gray-600">Exactly \( r \)</span> <span class="text-[#8610A8] font-bold bg-[#F4EAFE] px-2 py-0.5 rounded">\( P(X=r) \)</span></div>
+                            <div class="flex justify-between items-center border-b border-[#F3E8FF] pb-1.5"><span class="font-bold text-gray-600">At most \( r \)</span> <span class="text-[#8610A8] font-bold bg-[#F4EAFE] px-2 py-0.5 rounded">\( P(X \le r) \)</span></div>
+                            <div class="flex justify-between items-center border-b border-[#F3E8FF] pb-1.5"><span class="font-bold text-gray-600">At least \( r \)</span> <span class="text-[#8610A8] font-bold bg-[#F4EAFE] px-2 py-0.5 rounded">\( P(X \ge r) \)</span></div>
+                            <div class="flex justify-between items-center border-b border-[#F3E8FF] pb-1.5"><span class="font-bold text-gray-600">Fewer than \( r \)</span> <span class="text-[#8610A8] font-bold bg-[#F4EAFE] px-2 py-0.5 rounded">\( P(X < r) \)</span></div>
+                            <div class="flex justify-between items-center border-b border-[#F3E8FF] pb-1.5 md:col-span-2"><span class="font-bold text-gray-600">More than \( r \)</span> <span class="text-[#8610A8] font-bold bg-[#F4EAFE] px-2 py-0.5 rounded">\( P(X > r) \)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Petaling Jaya -->
+                <div class="card-example">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-[#F4EAFE] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Lecture Example</span>
+                    <p class="text-body mb-3">40% of the population agree with the statement that having a college education is important to succeed in the business world. A random sample of 5 people is selected.</p>
+                    
+                    <div class="bg-[#FAF7FF] p-2 rounded-lg border border-[#D8B4FE] mb-4 text-center text-sm font-bold text-[#5B176D]">
+                        \( X \sim B(5, 0.4) \)
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Part A -->
+                        <div>
+                            <p class="font-bold text-gray-800 mb-1.5 text-sm">(a) exactly 2 people will agree</p>
+                            <button onclick="revealStep('ex7a-solution', this)" class="text-xs font-bold text-[#8610A8] border border-[#8610A8] rounded px-3 py-1 hover:bg-[#F4EAFE] transition-colors">Translate & Solve</button>
+                            <div id="ex7a-solution" class="hidden mt-2 pl-3 border-l-2 border-[#8610A8]">
+                                <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \( P(X=2) \)</p>
+                                <div class="math-display text-sm">
+                                    \[
+                                    P(X=2) = \binom{5}{2} (0.4)^2 (0.6)^3 = 0.3456
+                                    \]
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Part B -->
+                        <div>
+                            <p class="font-bold text-gray-800 mb-1.5 text-sm">(b) at most 3 people will agree</p>
+                            <button onclick="revealStep('ex7b-solution', this)" class="text-xs font-bold text-[#8610A8] border border-[#8610A8] rounded px-3 py-1 hover:bg-[#F4EAFE] transition-colors">Translate & Solve</button>
+                            <div id="ex7b-solution" class="hidden mt-2 pl-3 border-l-2 border-[#8610A8]">
+                                <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \( P(X \le 3) \)</p>
+                                <div class="math-display text-sm">
+                                    \[
+                                    \begin{aligned}
+                                    P(X \le 3) &= 1 - P(X \ge 4) \\[3pt]
+                                    &= 1 - [P(X=4) + P(X=5)] \\[3pt]
+                                    &= 1 - 0.0870 = 0.9130
+                                    \end{aligned}
+                                    \]
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Part C -->
+                        <div>
+                            <p class="font-bold text-gray-800 mb-1.5 text-sm">(c) at least 2 people will agree</p>
+                            <button onclick="revealStep('ex7c-solution', this)" class="text-xs font-bold text-[#8610A8] border border-[#8610A8] rounded px-3 py-1 hover:bg-[#F4EAFE] transition-colors">Translate & Solve</button>
+                            <div id="ex7c-solution" class="hidden mt-2 pl-3 border-l-2 border-[#8610A8]">
+                                <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \( P(X \ge 2) \)</p>
+                                <div class="math-display text-sm">
+                                    \[
+                                    \begin{aligned}
+                                    P(X \ge 2) &= 1 - P(X \le 1) \\[3pt]
+                                    &= 1 - [P(X=0) + P(X=1)] \\[3pt]
+                                    &= 1 - 0.3370 = 0.6630
+                                    \end{aligned}
+                                    \]
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Part D -->
+                        <div>
+                            <p class="font-bold text-gray-800 mb-1.5 text-sm">(d) fewer than 3 people will agree</p>
+                            <button onclick="revealStep('ex7d-solution', this)" class="text-xs font-bold text-[#8610A8] border border-[#8610A8] rounded px-3 py-1 hover:bg-[#F4EAFE] transition-colors">Translate & Solve</button>
+                            <div id="ex7d-solution" class="hidden mt-2 pl-3 border-l-2 border-[#8610A8]">
+                                <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \( P(X < 3) \implies P(X \le 2) \)</p>
+                                <div class="math-display text-sm">
+                                    \[
+                                    \begin{aligned}
+                                    P(X \le 2) &= P(X=0) + P(X=1) + P(X=2) \\[3pt]
+                                    &= 0.6826
+                                    \end{aligned}
+                                    \]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept: Binomial Mean & Variance -->
+                <div class="card-concept mb-0">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        Mean & Variance of Binomial Distribution
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <!-- Mean -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-4xl font-serif">μ</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Mean</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-primary">
+                                    \[ \mu = np \]
+                                </div>
+                            </div>
+                            <!-- Variance -->
+                            <div class="formula-card">
+                                <div class="formula-bg-pattern"><span class="text-4xl font-serif">σ²</span></div>
+                                <div class="formula-tag">FORMULA</div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#5B176D] text-center">Variance</h3>
+                                <div class="math-display text-[#4A005E] font-bold formula-primary">
+                                    \[ \sigma^2 = npq \]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TRY SECTION (FORMATIVE QUIZ) -->
+            <section id="sec-try" class="page-section">
+                <!-- Section Header -->
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-3">
+                        <div>
+                            <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider" id="try-q-badge">Question 1</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mt-1">Formative Practice</h2>
+                        </div>
+                        <div class="text-xs font-bold text-[#5B176D] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="try-q-tracker">1 OF 8</div>
+                    </div>
+                    <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                </div>
+
+                <div class="flex justify-center space-x-1.5 mb-5" id="try-progress-dots">
+                    <!-- Dots dynamically added -->
+                </div>
+
+                <div id="try-quiz-content" class="playbook-card p-4 md:p-6 mb-4">
+                    <div class="text-body mb-5 font-medium" id="try-q-text">
+                        <!-- Question Text Here -->
+                    </div>
+                    <div class="space-y-3" id="try-options-container">
+                        <!-- Options Here -->
+                    </div>
+                    
+                    <div id="try-feedback-area" class="hidden mt-4 transition-all duration-300">
+                        <!-- Feedback Here -->
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-end gap-2 mt-5">
+                        <button id="btn-try-check" class="w-full md:w-auto bg-[#8610A8] hover:bg-[#5B176D] disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm" disabled>
+                            Check Answer
+                        </button>
+                        <button id="btn-try-next" class="hidden w-full md:w-auto bg-[#172033] hover:bg-black text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm flex items-center justify-center">
+                            Next Question <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Try Quiz End Screen -->
+                <div id="try-end-screen" class="hidden playbook-card p-6 md:p-10 text-center mt-3">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F4EAFE] text-[#8610A8] mb-4">
+                        <svg class="w-8 h-8 large-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-[#3D0055] mb-2">TRY COMPLETED</h2>
+                    
+                    <div class="bg-[#FAF7FF] rounded-xl p-6 inline-block min-w-[200px] border border-[#F3E8FF] mb-6 shadow-sm">
+                        <div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">Score</div>
+                        <div class="text-4xl font-bold text-[#8610A8] mb-1" id="try-final-score">0 / 8</div>
+                        <div class="text-sm font-medium text-gray-500" id="try-final-accuracy">Accuracy: 0%</div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
+                        <button onclick="resetTryQuiz()" class="px-6 py-3 rounded-xl font-bold text-[#8610A8] bg-[#F4EAFE] hover:bg-[#E9D5FF] transition-colors border border-[#D8B4FE] text-sm">
+                            Try Again
+                        </button>
+                        <button onclick="navigateTo('sec-check'); updateNav('nav-check')" class="px-6 py-3 rounded-xl font-bold text-white bg-[#8610A8] hover:bg-[#5B176D] transition-colors shadow-sm text-sm">
+                            Proceed to Check →
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHECK SECTION (MASTERY ASSESSMENT) -->
+            <section id="sec-check" class="page-section">
+                <!-- Section Header -->
+                <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#5B176D] to-[#8610A8] text-white rounded-2xl shadow-md relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-3">
+                        <div>
+                            <span class="text-[#D98AF3] font-bold text-xs md:text-sm uppercase tracking-wider">CHECK</span>
+                            <h2 class="text-2xl md:text-3xl font-bold mt-1">Mastery Assessment</h2>
+                            <p class="text-[#F4EAFE] text-[14px] opacity-95 mt-1">Test your full understanding of Chapter 3.</p>
+                        </div>
+                        <div class="text-xs font-bold text-[#5B176D] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="check-q-tracker">1 OF 8</div>
+                    </div>
+                    <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+
+                <div id="check-quiz-content" class="playbook-card p-4 md:p-6 mb-4">
+                    <div class="text-body mb-5 font-medium" id="check-q-text">
+                        <!-- Question Text Here -->
+                    </div>
+                    <div class="space-y-3" id="check-options-container">
+                        <!-- Options Here -->
+                    </div>
+                    
+                    <div id="check-feedback-area" class="hidden mt-4 transition-all duration-300">
+                        <!-- Dynamic Feedback Here -->
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-end gap-2 mt-5">
+                        <button id="btn-check-submit" class="w-full md:w-auto bg-[#8610A8] hover:bg-[#5B176D] disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm" disabled>
+                            Check Answer
+                        </button>
+                        <button id="btn-check-next" class="hidden w-full md:w-auto bg-[#172033] hover:bg-black text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm flex items-center justify-center">
+                            Next Question <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Check Results Screen -->
+                <div id="check-results-screen" class="hidden mt-4">
+                    <div class="playbook-card p-6 md:p-8 mb-6">
+                        <div class="text-center mb-6">
+                            <h2 class="text-2xl font-bold text-[#3D0055] mb-2">Mastery Assessment Complete</h2>
+                            <p class="text-gray-600 text-sm">Here is how you performed across the chapter topics.</p>
+                            
+                            <div class="bg-[#FAF7FF] rounded-xl p-6 inline-block min-w-[240px] border border-[#F3E8FF] mt-4 shadow-sm">
+                                <div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">FINAL SCORE</div>
+                                <div class="text-4xl font-bold text-[#8610A8] mb-1" id="check-final-score">0 / 8</div>
+                                <div class="text-sm font-bold text-gray-700 mb-3" id="check-final-accuracy">0%</div>
+                                
+                                <div class="flex justify-center gap-4 text-xs font-medium">
+                                    <div class="text-green-600"><span id="check-count-correct">0</span> Correct</div>
+                                    <div class="text-red-600"><span id="check-count-incorrect">0</span> Incorrect</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Topic Breakdown -->
+                        <div class="mb-6 border-t border-gray-100 pt-5">
+                            <h3 class="text-sm font-bold text-[#5B176D] mb-3 uppercase tracking-wider">Topic Summary</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="check-topic-breakdown">
+                                <!-- Breakdown populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Mistakes List -->
+                        <div id="check-mistakes-container" class="mb-6 hidden border-t border-gray-100 pt-5">
+                            <h3 class="text-sm font-bold text-red-700 mb-3 uppercase tracking-wider">Review Your Mistakes</h3>
+                            <div class="space-y-4" id="check-mistakes-list">
+                                <!-- Mistakes populated here -->
+                            </div>
+                        </div>
+
+                        <div class="text-center w-full mx-auto pt-5 border-t border-gray-100">
+                            <button onclick="completeWorkbook()" class="w-full md:w-auto bg-[#8610A8] hover:bg-[#5B176D] text-white px-8 py-3 rounded-xl font-bold text-sm transition-colors shadow-md inline-flex items-center justify-center">
+                                Complete Workbook <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Completion Message -->
+                <div id="completion-message" class="hidden text-center py-8 playbook-card mt-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4 shadow-inner">
+                        <svg class="w-8 h-8 large-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#3D0055] mb-2">Pre-Class Preparation Complete 🎉</h3>
+                    <p class="text-gray-600 text-sm">You are now ready for Chapter 3.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Safe MathJax rendering helper
+        function safeMathJaxTypeset() {
+            if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise().catch((err) => console.log('MathJax typeset failed: ', err));
+            }
+        }
+
+        // Progress tracking
+        let visitedSections = new Set(['sec-start']);
+        const allSections = ['sec-start', 'sec-3-1', 'sec-3-2', 'sec-3-3', 'sec-try', 'sec-check'];
+        const navMap = {
+            'nav-start': 'sec-start',
+            'nav-3-1': 'sec-3-1',
+            'nav-3-2': 'sec-3-2',
+            'nav-3-3': 'sec-3-3',
+            'nav-try': 'sec-try',
+            'nav-check': 'sec-check'
+        };
+
+        function closeSidebarOnMobile() {
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            document.querySelector('.flex-1').scrollTop = 0;
+            
+            // Update progress calculation based on active sequence
+            const currentIndex = allSections.indexOf(sectionId);
+            for(let i=0; i<=currentIndex; i++) {
+                visitedSections.add(allSections[i]);
+            }
+            updateProgressBar();
+            
+            // Re-render MathJax if present
+            safeMathJaxTypeset();
+        }
+
+        function updateNav(navId) {
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('nav-active'));
+            document.getElementById(navId).classList.add('nav-active');
+            
+            // Show completion ticks
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                const mappedSectionId = navMap[nav.id];
+                if (visitedSections.has(mappedSectionId) && nav.id !== navId) {
+                    nav.querySelector('.completion-tick').classList.remove('hidden');
+                }
+            });
+            
+            closeSidebarOnMobile();
+        }
+
+        function updateProgressBar() {
+            const percentage = Math.round((visitedSections.size / allSections.length) * 100);
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `${percentage}%`;
+        }
+
+        function revealStep(stepId, btnRef) {
+            document.getElementById(stepId).classList.remove('hidden');
+            if (btnRef) btnRef.style.display = 'none';
+            safeMathJaxTypeset();
+        }
+
+        function completeWorkbook() {
+            visitedSections = new Set(allSections);
+            updateProgressBar();
+            document.getElementById('check-results-screen').style.display = 'none';
+            document.getElementById('completion-message').classList.remove('hidden');
+            
+            // Update ticks
+            document.querySelectorAll('.completion-tick').forEach(tick => tick.classList.remove('hidden'));
+        }
+
+        // ==========================================
+        // TRY SECTION LOGIC (Interactive Quiz)
+        // ==========================================
+        var tryQuestions = [
+            {
+                q: "The probability distribution of the discrete random variable \\( X \\) is given as follows:<br><div class='overflow-x-auto my-3'><table class='w-full max-w-sm mx-auto text-center border-collapse text-sm bg-white border border-[#E9D5FF] shadow-sm rounded-lg overflow-hidden'><tbody><tr class='border-b border-[#E9D5FF]'><th class='p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF] text-[#5B176D] font-bold'>\\( X \\)</th><td class='p-1.5 border-r border-[#F3E8FF]'>1</td><td class='p-1.5 border-r border-[#F3E8FF]'>2</td><td class='p-1.5 border-r border-[#F3E8FF]'>3</td><td class='p-1.5 border-r border-[#F3E8FF]'>4</td><td class='p-1.5'>5</td></tr><tr><th class='p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF] text-[#5B176D] font-bold'>\\( P(X=x) \\)</th><td class='p-1.5 border-r border-[#F3E8FF]'>0.4</td><td class='p-1.5 border-r border-[#F3E8FF] font-bold text-[#8610A8]'>C</td><td class='p-1.5 border-r border-[#F3E8FF]'>0.1</td><td class='p-1.5 border-r border-[#F3E8FF]'>0.09</td><td class='p-1.5'>0.06</td></tr></tbody></table></div>Find the value of \\( C \\).",
+                options: ["\\( 0.25 \\)", "\\( 0.35 \\)", "\\( 0.45 \\)", "\\( 0.55 \\)"],
+                ans: 1,
+                exp: "\\[ \\sum P(X=x) = 1 \\]\\[ 0.40 + C + 0.10 + 0.09 + 0.06 = 1 \\]\\[ 0.65 + C = 1 \\implies C = 0.35 \\]"
+            },
+            {
+                q: "If \\( P(X=x) = kx \\) for \\( x = 1, 2, 3, 4 \\), find the value of \\( k \\).",
+                options: ["\\( \\frac{1}{4} \\)", "\\( \\frac{1}{8} \\)", "\\( \\frac{1}{10} \\)", "\\( \\frac{1}{12} \\)"],
+                ans: 2,
+                exp: "\\[ \\sum P(X=x) = 1 \\]\\[ k(1) + k(2) + k(3) + k(4) = 1 \\]\\[ 10k = 1 \\implies k = \\frac{1}{10} \\]"
+            },
+            {
+                q: "Given \\( E(X) = 2 \\) and \\( E(X^2) = 5 \\), find \\( \\operatorname{Var}(X) \\).",
+                options: ["\\( 1 \\)", "\\( 3 \\)", "\\( 7 \\)", "\\( 9 \\)"],
+                ans: 0,
+                exp: "\\[ \\operatorname{Var}(X) = E(X^2) - [E(X)]^2 \\]\\[ = 5 - (2)^2 \\]\\[ = 5 - 4 = 1 \\]"
+            },
+            {
+                q: "A fair die is rolled. What is the expected value, \\( E(X) \\)?",
+                options: ["\\( 2.5 \\)", "\\( 3.0 \\)", "\\( 3.5 \\)", "\\( 4.0 \\)"],
+                ans: 2,
+                exp: "The outcomes are 1, 2, 3, 4, 5, 6, each with probability \\( \\frac{1}{6} \\).\\[ E(X) = \\sum xP(X=x) \\]\\[ = 1(\\frac{1}{6}) + 2(\\frac{1}{6}) + \\dots + 6(\\frac{1}{6}) = \\frac{21}{6} = 3.5 \\]"
+            },
+            {
+                q: "Which of the following is NOT a requirement for a binomial experiment?",
+                options: [
+                    "There is a fixed number of trials.",
+                    "The probability of success changes from trial to trial.",
+                    "Each trial has only two possible outcomes.",
+                    "The trials are independent."
+                ],
+                ans: 1,
+                exp: "In a binomial experiment, the probability of success \\( (p) \\) must remain <strong>constant</strong> for each trial."
+            },
+            {
+                q: "For a binomial distribution \\( X \\sim B(10, 0.2) \\), what is the mean?",
+                options: ["\\( 0.2 \\)", "\\( 2.0 \\)", "\\( 8.0 \\)", "\\( 10.0 \\)"],
+                ans: 1,
+                exp: "For a binomial distribution, the mean is \\( \\mu = np \\).\\[ \\mu = 10(0.2) = 2.0 \\]"
+            },
+            {
+                q: "For a binomial distribution \\( X \\sim B(10, 0.2) \\), what is the variance?",
+                options: ["\\( 1.6 \\)", "\\( 2.0 \\)", "\\( 8.0 \\)", "\\( 10.0 \\)"],
+                ans: 0,
+                exp: "For a binomial distribution, the variance is \\( \\sigma^2 = npq \\). Since \\( p = 0.2 \\), \\( q = 0.8 \\).\\[ \\sigma^2 = 10(0.2)(0.8) = 1.6 \\]"
+            },
+            {
+                q: "Translate the phrase 'at most 4 successes' into probability notation.",
+                options: [
+                    "\\( P(X = 4) \\)",
+                    "\\( P(X \\ge 4) \\)",
+                    "\\( P(X \\le 4) \\)",
+                    "\\( P(X < 4) \\)"
+                ],
+                ans: 2,
+                exp: "'At most 4' means 4 is the maximum possible value, which translates mathematically to \\( X \\le 4 \\)."
+            }
+        ];
+
+        let currentTryQ = 0;
+        let tryScore = 0;
+        let selectedTryOption = null;
+
+        function renderTryDots() {
+            let dotsHtml = '';
+            for(let i=0; i<tryQuestions.length; i++) {
+                if(i < currentTryQ) dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#8610A8]"></div>';
+                else if(i === currentTryQ) dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#B944E3] border-2 border-[#F4EAFE]"></div>';
+                else dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#E9D5FF]"></div>';
+            }
+            document.getElementById('try-progress-dots').innerHTML = dotsHtml;
+            document.getElementById('try-q-tracker').innerText = `${currentTryQ + 1} OF ${tryQuestions.length}`;
+            document.getElementById('try-q-badge').innerText = `Question ${currentTryQ + 1}`;
+        }
+
+        function renderTryQuestion() {
+            selectedTryOption = null;
+            const qData = tryQuestions[currentTryQ];
+            document.getElementById('try-q-text').innerHTML = qData.q;
+            
+            let optionsHtml = '';
+            qData.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button class="quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm" onclick="window.selectTryOption(${idx})" id="try-opt-${idx}">
+                        <span class="mr-3 text-gray-400 font-bold w-5 shrink-0">${String.fromCharCode(65 + idx)}.</span> 
+                        <div class="flex-1 overflow-x-auto">${opt}</div>
+                    </button>
+                `;
+            });
+            document.getElementById('try-options-container').innerHTML = optionsHtml;
+            
+            document.getElementById('btn-try-check').style.display = 'block';
+            document.getElementById('btn-try-check').disabled = true;
+            document.getElementById('btn-try-next').style.display = 'none';
+            document.getElementById('try-feedback-area').classList.add('hidden');
+            
+            renderTryDots();
+            safeMathJaxTypeset();
+        }
+
+        window.selectTryOption = function(idx) {
+            selectedTryOption = idx;
+            document.querySelectorAll('#try-options-container button').forEach((btn, i) => {
+                btn.className = 'quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm';
+                if(i === idx) btn.classList.add('quiz-opt-selected');
+            });
+            document.getElementById('btn-try-check').disabled = false;
+        };
+
+        document.getElementById('btn-try-check').addEventListener('click', () => {
+            const qData = tryQuestions[currentTryQ];
+            const isCorrect = (selectedTryOption === qData.ans);
+            
+            if(isCorrect) tryScore++;
+            
+            // Disable all options
+            document.querySelectorAll('#try-options-container button').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('quiz-opt-selected');
+            });
+            
+            // Highlight Correct / Incorrect
+            const selectedBtn = document.getElementById(`try-opt-${selectedTryOption}`);
+            const correctBtn = document.getElementById(`try-opt-${qData.ans}`);
+            
+            if (isCorrect) {
+                selectedBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, true);
+            } else {
+                selectedBtn.classList.add('quiz-opt-incorrect');
+                correctBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, false);
+            }
+            
+            // Show Feedback
+            const feedbackArea = document.getElementById('try-feedback-area');
+            feedbackArea.classList.remove('hidden');
+            
+            if(isCorrect) {
+                feedbackArea.className = 'mt-4 p-4 rounded-xl border bg-[#F0FDF4] border-[#86EFAC] block';
+                feedbackArea.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-[#166534] font-bold text-lg mb-2 flex items-center"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Correct!</span>
+                        <div class="border-t border-[#BBF7D0] pt-2 mt-1">
+                            <span class="font-bold text-[11px] uppercase tracking-wider mb-1 block text-[#15803D]">💡 Why?</span>
+                            <div class="text-sm text-gray-800">${qData.exp}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedbackArea.className = 'mt-4 p-4 rounded-xl border bg-[#FEF2F2] border-[#FCA5A5] block';
+                feedbackArea.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-[#991B1B] font-bold text-lg mb-2 flex items-center"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> Not quite.</span>
+                        <div class="border-t border-[#FECACA] pt-2 mt-1">
+                            <span class="font-bold text-[11px] uppercase tracking-wider mb-1 block text-[#B91C1C]">💡 Let's review</span>
+                            <div class="text-sm text-gray-800">${qData.exp}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('btn-try-check').style.display = 'none';
+            document.getElementById('btn-try-next').style.display = 'flex';
+            safeMathJaxTypeset();
+        });
+
+        function addStatusLabel(btn, isCorrect) {
+            const span = document.createElement('span');
+            span.className = 'absolute right-3 top-1/2 transform -translate-y-1/2 font-bold flex items-center bg-white bg-opacity-90 px-2 py-0.5 rounded shadow-sm text-xs';
+            if(isCorrect) {
+                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> <span class="text-green-700">Correct</span>';
+            } else {
+                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> <span class="text-red-700">Incorrect</span>';
+            }
+            btn.appendChild(span);
+        }
+
+        document.getElementById('btn-try-next').addEventListener('click', () => {
+            currentTryQ++;
+            if(currentTryQ < tryQuestions.length) {
+                renderTryQuestion();
+            } else {
+                document.getElementById('try-quiz-content').style.display = 'none';
+                document.getElementById('try-end-screen').style.display = 'block';
+                document.getElementById('try-final-score').innerText = `${tryScore} / ${tryQuestions.length}`;
+                document.getElementById('try-final-accuracy').innerText = `Accuracy: ${Math.round((tryScore/tryQuestions.length)*100)}%`;
+            }
+        });
+
+        function resetTryQuiz() {
+            currentTryQ = 0;
+            tryScore = 0;
+            document.getElementById('try-quiz-content').style.display = 'block';
+            document.getElementById('try-end-screen').style.display = 'none';
+            renderTryQuestion();
+        }
+
+        // ==========================================
+        // CHECK SECTION LOGIC (Mastery Assessment)
+        // ==========================================
+        const masteryQuestions = [
+            {
+                topic: "3.1 Probability Distributions",
+                q: "If \\( P(X=x) = kx \\) for \\( x = 1, 2, 3, 4 \\), find the value of \\( k \\).",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.3 \\)", "\\( 0.4 \\)"],
+                ans: 0,
+                solution: "\\[ \\sum P(X=x) = 1 \\]\\[ k(1) + k(2) + k(3) + k(4) = 1 \\]\\[ 10k = 1 \\implies k = 0.1 \\]",
+                why: "The probabilities of all possible values of a discrete random variable must add up to 1. We sum all probabilities and equate to 1 to find the unknown constant.",
+                error: "You might have calculated the expected value \\( E(X) \\) instead of using the property \\( \\sum P(X=x) = 1 \\).",
+                idea: "For a valid discrete probability distribution: \\( \\sum P(X=x) = 1 \\)"
+            },
+            {
+                topic: "3.1 Probability Distributions",
+                q: "Which of the following conditions must be true for a discrete probability distribution?",
+                options: [
+                    "\\( P(X=x) > 1 \\) for all \\( x \\)",
+                    "\\( \\sum P(X=x) = 0 \\)",
+                    "\\( 0 \\le P(X=x) \\le 1 \\) for all \\( x \\)",
+                    "\\( P(X=x) \\) can be negative."
+                ],
+                ans: 2,
+                solution: "A probability distribution must satisfy:\n1. \\( \\sum P(X=x) = 1 \\)\n2. \\( 0 \\le P(X=x) \\le 1 \\)",
+                why: "Probabilities represent the likelihood of an event occurring, which must be between 0% (impossible) and 100% (certain), corresponding to values between 0 and 1.",
+                error: "You might have confused the rules of probabilities with properties of general variables.",
+                idea: "Probabilities are always bounded: \\( 0 \\le P(X=x) \\le 1 \\)."
+            },
+            {
+                topic: "3.1 Probability Distributions",
+                q: "Given a discrete variable \\( X \\) takes values 1, 2, 3. If \\( P(X=1) = 0.2 \\) and \\( P(X=2) = 0.5 \\), find \\( P(X=3) \\).",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.3 \\)", "\\( 0.4 \\)"],
+                ans: 2,
+                solution: "\\[ \\sum P(X=x) = 1 \\]\\[ P(X=1) + P(X=2) + P(X=3) = 1 \\]\\[ 0.2 + 0.5 + P(X=3) = 1 \\]\\[ 0.7 + P(X=3) = 1 \\implies P(X=3) = 0.3 \\]",
+                why: "Because \\( X \\) only takes the values 1, 2, and 3, their probabilities must sum to 1.",
+                error: "You may have added incorrectly or forgotten that the total sum must be exactly 1.",
+                idea: "The missing probability is always \\( 1 - \\) (sum of known probabilities)."
+            },
+            {
+                topic: "3.2 Mean & Variance",
+                q: "Find the mean (expected value) for the probability distribution:<br><div class='overflow-x-auto my-3'><table class='w-full max-w-xs mx-auto text-center border-collapse text-sm bg-white border border-[#E9D5FF] rounded-lg overflow-hidden'><tbody><tr class='border-b border-[#E9D5FF]'><th class='p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]'>\\( X \\)</th><td class='p-1.5 border-r border-[#F3E8FF]'>0</td><td class='p-1.5'>1</td></tr><tr><th class='p-1.5 border-r border-[#E9D5FF] bg-[#FAF7FF]'>\\( P(X=x) \\)</th><td class='p-1.5 border-r border-[#F3E8FF]'>0.8</td><td class='p-1.5'>0.2</td></tr></tbody></table></div>",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.8 \\)", "\\( 1.0 \\)"],
+                ans: 1,
+                solution: "\\[ E(X) = \\sum xP(X=x) \\]\\[ = (0)(0.8) + (1)(0.2) \\]\\[ = 0 + 0.2 = 0.2 \\]",
+                why: "The mean is calculated by multiplying each outcome by its probability and summing the results.",
+                error: "You might have just looked at the highest probability (0.8) instead of applying the formula \\( \\sum xP(X=x) \\).",
+                idea: "Mean \\( \\mu = E(X) = \\sum xP(X=x) \\)."
+            },
+            {
+                topic: "3.2 Mean & Variance",
+                q: "Given \\( E(X) = 3 \\) and \\( \\operatorname{Var}(X) = 4 \\), find \\( E(X^2) \\).",
+                options: ["\\( 5 \\)", "\\( 7 \\)", "\\( 10 \\)", "\\( 13 \\)"],
+                ans: 3,
+                solution: "\\[ \\operatorname{Var}(X) = E(X^2) - [E(X)]^2 \\]\\[ 4 = E(X^2) - (3)^2 \\]\\[ 4 = E(X^2) - 9 \\]\\[ E(X^2) = 4 + 9 = 13 \\]",
+                why: "We manipulate the variance formula to solve for \\( E(X^2) \\).",
+                error: "You likely subtracted instead of adding, or forgot to square \\( E(X) \\).",
+                idea: "Rearrange the variance formula: \\( E(X^2) = \\operatorname{Var}(X) + [E(X)]^2 \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "For a binomial distribution, if the number of trials is \\( n=5 \\) and the probability of success is \\( p=0.4 \\), find the probability of exactly 2 successes.",
+                options: ["\\( 0.2304 \\)", "\\( 0.3456 \\)", "\\( 0.4000 \\)", "\\( 0.6826 \\)"],
+                ans: 1,
+                solution: "\\[ X \\sim B(5, 0.4) \\]\\[ P(X=2) = \\binom{5}{2} (0.4)^2 (0.6)^3 \\]\\[ = 10(0.16)(0.216) \\]\\[ = 0.3456 \\]",
+                why: "We substitute \\( n=5, p=0.4, q=0.6, r=2 \\) into the binomial probability formula.",
+                error: "You may have used the wrong value for \\( q \\) or miscalculated the combination \\( \\binom{5}{2} \\).",
+                idea: "Binomial Formula: \\( P(X=r) = \\binom{n}{r} p^r q^{n-r} \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "If \\( X \\sim B(20, 0.3) \\), what is the mean of \\( X \\)?",
+                options: ["\\( 0.3 \\)", "\\( 3.0 \\)", "\\( 6.0 \\)", "\\( 14.0 \\)"],
+                ans: 2,
+                solution: "\\[ \\mu = np \\]\\[ \\mu = 20(0.3) \\]\\[ = 6.0 \\]",
+                why: "For a binomial distribution, the expected value (mean) is simply the number of trials multiplied by the probability of success.",
+                error: "You may have calculated the variance \\( (npq) \\) or used \\( q \\) instead of \\( p \\).",
+                idea: "Binomial Mean: \\( \\mu = np \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "If \\( X \\sim B(10, 0.5) \\), find the variance of \\( X \\).",
+                options: ["\\( 2.5 \\)", "\\( 5.0 \\)", "\\( 7.5 \\)", "\\( 10.0 \\)"],
+                ans: 0,
+                solution: "\\[ \\sigma^2 = npq \\]\\[ p = 0.5, \\quad q = 1 - 0.5 = 0.5 \\]\\[ \\sigma^2 = 10(0.5)(0.5) \\]\\[ = 2.5 \\]",
+                why: "The variance of a binomial distribution takes into account the number of trials, the probability of success, and the probability of failure.",
+                error: "You may have calculated the mean \\( (np = 5) \\) instead of the variance.",
+                idea: "Binomial Variance: \\( \\sigma^2 = npq \\)."
+            }
+        ];
+
+        let currentCheckQ = 0;
+        let checkSelectedOpt = null;
+        let checkAnswers = []; // Store { isCorrect, qData, selectedOpt }
+        
+        function renderCheckQuestion() {
+            checkSelectedOpt = null;
+            const qData = masteryQuestions[currentCheckQ];
+            document.getElementById('check-q-text').innerHTML = qData.q;
+            
+            let optionsHtml = '';
+            qData.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button class="quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm" onclick="window.selectCheckOption(${idx})" id="check-opt-${idx}">
+                        <span class="mr-3 text-gray-400 font-bold w-5 shrink-0">${String.fromCharCode(65 + idx)}.</span> 
+                        <div class="flex-1 overflow-x-auto">${opt}</div>
+                    </button>
+                `;
+            });
+            document.getElementById('check-options-container').innerHTML = optionsHtml;
+            document.getElementById('check-q-tracker').innerText = `${currentCheckQ + 1} OF ${masteryQuestions.length}`;
+            
+            document.getElementById('btn-check-submit').style.display = 'block';
+            document.getElementById('btn-check-submit').disabled = true;
+            document.getElementById('btn-check-next').style.display = 'none';
+            document.getElementById('check-feedback-area').classList.add('hidden');
+            
+            safeMathJaxTypeset();
+        }
+
+        window.selectCheckOption = function(idx) {
+            checkSelectedOpt = idx;
+            document.querySelectorAll('#check-options-container button').forEach((btn, i) => {
+                btn.className = 'quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm';
+                if(i === idx) btn.classList.add('quiz-opt-selected');
+            });
+            document.getElementById('btn-check-submit').disabled = false;
+        };
+
+        document.getElementById('btn-check-submit').addEventListener('click', () => {
+            const qData = masteryQuestions[currentCheckQ];
+            const isCorrect = (checkSelectedOpt === qData.ans);
+            
+            checkAnswers.push({
+                isCorrect: isCorrect,
+                qData: qData,
+                selectedOptionIdx: checkSelectedOpt
+            });
+            
+            // Disable buttons
+            document.querySelectorAll('#check-options-container button').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('quiz-opt-selected');
+            });
+            
+            // Highlight Correct/Incorrect
+            const selectedBtn = document.getElementById(`check-opt-${checkSelectedOpt}`);
+            const correctBtn = document.getElementById(`check-opt-${qData.ans}`);
+            
+            if (isCorrect) {
+                selectedBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, true);
+            } else {
+                selectedBtn.classList.add('quiz-opt-incorrect');
+                correctBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, false);
+            }
+            
+            // Construct Explanation Card
+            const feedbackArea = document.getElementById('check-feedback-area');
+            feedbackArea.classList.remove('hidden');
+            
+            if(isCorrect) {
+                feedbackArea.className = 'mt-4 playbook-card p-5 border border-[#86EFAC] bg-[#F0FDF4] shadow-sm block';
+                feedbackArea.innerHTML = `
+                    <div class="mb-3">
+                        <span class="text-[#166534] font-bold text-lg flex items-center uppercase tracking-wider"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Correct</span>
+                    </div>
+                    
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Correct Answer</div>
+                    <div class="bg-white px-3 py-2 rounded-lg border border-gray-200 mb-4 text-sm inline-block">${qData.options[qData.ans]}</div>
+                    
+                    <div class="border-t border-[#BBF7D0] pt-4 mb-4">
+                        <div class="text-xs font-bold text-[#15803D] uppercase tracking-wider mb-2">How to solve it</div>
+                        <div class="math-display text-sm bg-white p-3 rounded-lg border border-[#BBF7D0]">${qData.solution}</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#15803D] uppercase tracking-wider mb-1">Why?</div>
+                        <p class="text-sm text-gray-800">${qData.why}</p>
+                    </div>
+                    
+                    <div class="bg-[#DCFCE7] border border-[#86EFAC] p-3 rounded-lg">
+                        <div class="text-xs font-bold text-[#166534] uppercase tracking-wider mb-1 flex items-center">⭐ Key Idea</div>
+                        <p class="text-sm text-[#166534] font-medium">${qData.idea}</p>
+                    </div>
+                `;
+            } else {
+                feedbackArea.className = 'mt-4 playbook-card p-5 border border-[#FCA5A5] bg-[#FEF2F2] shadow-sm block';
+                feedbackArea.innerHTML = `
+                    <div class="mb-3">
+                        <span class="text-[#991B1B] font-bold text-lg flex items-center uppercase tracking-wider"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> Not quite</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div>
+                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Your Answer</div>
+                            <div class="bg-white px-2 py-1.5 rounded border border-red-200 text-sm opacity-80">${qData.options[checkSelectedOpt]}</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Correct Answer</div>
+                            <div class="bg-white px-2 py-1.5 rounded border border-gray-200 text-sm font-medium">${qData.options[qData.ans]}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-[#FECACA] pt-4 mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-2">Let's work through it</div>
+                        <div class="math-display text-sm bg-white p-3 rounded-lg border border-[#FECACA]">${qData.solution}</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1">Why?</div>
+                        <p class="text-sm text-gray-800">${qData.why}</p>
+                    </div>
+                    
+                    <div class="bg-red-50 border border-red-200 p-3 rounded-lg mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1 flex items-center">⚠️ Common Error</div>
+                        <p class="text-sm text-gray-800">${qData.error}</p>
+                    </div>
+                    
+                    <div class="bg-[#FEE2E2] border border-[#FCA5A5] p-3 rounded-lg">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1 flex items-center">⭐ Remember</div>
+                        <p class="text-sm text-[#7F1D1D] font-medium">${qData.idea}</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('btn-check-submit').style.display = 'none';
+            document.getElementById('btn-check-next').style.display = 'flex';
+            safeMathJaxTypeset();
+        });
+
+        document.getElementById('btn-check-next').addEventListener('click', () => {
+            currentCheckQ++;
+            if(currentCheckQ < masteryQuestions.length) {
+                renderCheckQuestion();
+            } else {
+                showCheckResults();
+            }
+        });
+
+        function showCheckResults() {
+            document.getElementById('check-quiz-content').style.display = 'none';
+            document.getElementById('check-results-screen').style.display = 'block';
+            
+            let correctCount = checkAnswers.filter(a => a.isCorrect).length;
+            document.getElementById('check-final-score').innerText = `${correctCount} / ${masteryQuestions.length}`;
+            document.getElementById('check-final-accuracy').innerText = `${Math.round((correctCount/masteryQuestions.length)*100)}%`;
+            document.getElementById('check-count-correct').innerText = correctCount;
+            document.getElementById('check-count-incorrect').innerText = masteryQuestions.length - correctCount;
+            
+            // Topic Breakdown
+            const topicsStats = {};
+            checkAnswers.forEach(ans => {
+                const topic = ans.qData.topic;
+                if(!topicsStats[topic]) topicsStats[topic] = { total: 0, correct: 0 };
+                topicsStats[topic].total++;
+                if(ans.isCorrect) topicsStats[topic].correct++;
+            });
+            
+            let breakdownHtml = '';
+            for (const [topic, stats] of Object.entries(topicsStats)) {
+                breakdownHtml += `
+                    <div class="bg-white border border-gray-200 p-3 rounded-xl shadow-sm">
+                        <div class="font-bold text-xs text-[#5B176D] mb-1.5 leading-tight h-8">${topic}</div>
+                        <div class="text-lg font-bold text-gray-800">${stats.correct}/${stats.total}</div>
+                    </div>
+                `;
+            }
+            document.getElementById('check-topic-breakdown').innerHTML = breakdownHtml;
+            
+            // Mistakes Review
+            const mistakesList = checkAnswers.filter(a => !a.isCorrect).map((a, i) => {
+                const actualIndex = checkAnswers.indexOf(a) + 1;
+                return { ...a, questionNumber: actualIndex };
+            });
+            
+            if (mistakesList.length > 0) {
+                document.getElementById('check-mistakes-container').classList.remove('hidden');
+                let mistakesHtml = '';
+                mistakesList.forEach(m => {
+                    mistakesHtml += `
+                        <div class="bg-white border border-red-100 p-4 rounded-xl shadow-sm">
+                            <div class="flex items-center text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
+                                <span class="bg-red-50 text-red-700 border border-red-200 px-1.5 py-0.5 rounded mr-2">Question ${m.questionNumber}</span>
+                                <span>${m.qData.topic}</span>
+                            </div>
+                            <div class="text-sm font-medium mb-3">${m.qData.q}</div>
+                            
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-xs">
+                                <div class="bg-red-50 border border-red-200 p-2 rounded">
+                                    <div class="font-bold text-red-700 uppercase mb-1 text-[9px]">Your Answer</div>
+                                    <div class="opacity-80">${m.qData.options[m.selectedOptionIdx]}</div>
+                                </div>
+                                <div class="bg-green-50 border border-green-200 p-2 rounded">
+                                    <div class="font-bold text-green-700 uppercase mb-1 text-[9px]">Correct Answer</div>
+                                    <div class="font-medium">${m.qData.options[m.qData.ans]}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg text-xs">
+                                <div class="font-bold text-gray-600 uppercase mb-1 text-[10px]">Review</div>
+                                <div>${m.qData.idea}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('check-mistakes-list').innerHTML = mistakesHtml;
+            }
+            
+            safeMathJaxTypeset();
+        }
+
+        // Initialize First Quiz Questions
+        renderTryQuestion();
+        renderCheckQuestion();
+    </script>
+</body>
+</html>
