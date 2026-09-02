@@ -543,6 +543,159 @@
 
 
 
+
+<style id="binomial-real-life-applications">
+.real-life-hero{
+    background:linear-gradient(135deg,#FFF9FF 0%,#F4EAFE 55%,#FAF7FF 100%);
+    border:1px solid #E9D5FF;
+    border-left:5px solid #8610A8;
+    border-radius:1rem;
+    padding:1.15rem;
+    margin-bottom:1.25rem;
+    box-shadow:0 6px 20px rgba(91,23,109,.06);
+}
+.real-life-hero h3{color:#3D0055;font-weight:800;font-size:1.15rem;margin-bottom:.4rem}
+.real-life-flow{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.55rem;
+    margin-top:1rem;
+}
+.real-life-step{
+    background:#fff;
+    border:1px solid #E9D5FF;
+    border-radius:.8rem;
+    padding:.7rem .55rem;
+    text-align:center;
+    font-size:.74rem;
+    font-weight:800;
+    color:#5B176D;
+    line-height:1.35;
+}
+.application-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.85rem;
+}
+.application-card{
+    border:1px solid #E9D5FF;
+    background:#fff;
+    border-radius:1rem;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(74,0,94,.045);
+    transition:.2s ease;
+}
+.application-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(74,0,94,.08);
+    border-color:#C084FC;
+}
+.application-trigger{
+    width:100%;
+    border:0;
+    background:#fff;
+    padding:1rem;
+    display:flex;
+    align-items:flex-start;
+    gap:.8rem;
+    text-align:left;
+    cursor:pointer;
+}
+.application-icon{
+    width:2.6rem;
+    height:2.6rem;
+    border-radius:.8rem;
+    background:#F4EAFE;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:1.25rem;
+}
+.application-title{font-weight:800;color:#3D0055;font-size:.95rem;margin-bottom:.15rem}
+.application-question{font-size:.79rem;color:#64748B;line-height:1.45}
+.application-chevron{
+    margin-left:auto;
+    color:#8610A8;
+    font-weight:900;
+    transition:transform .2s ease;
+}
+.application-card.open .application-chevron{transform:rotate(180deg)}
+.application-detail{
+    display:none;
+    padding:0 1rem 1rem 4.4rem;
+}
+.application-card.open .application-detail{display:block}
+.application-model{
+    background:#FAF7FF;
+    border:1px solid #F3E8FF;
+    border-radius:.75rem;
+    padding:.75rem;
+    font-size:.78rem;
+    color:#374151;
+    line-height:1.55;
+}
+.application-model strong{color:#5B176D}
+.application-decision{
+    margin-top:.55rem;
+    background:#F0FDF4;
+    border:1px solid #BBF7D0;
+    color:#166534;
+    border-radius:.7rem;
+    padding:.6rem .7rem;
+    font-size:.76rem;
+    line-height:1.45;
+}
+.binomial-big-idea{
+    margin-top:1rem;
+    background:linear-gradient(135deg,#5B176D,#8610A8);
+    color:white;
+    border-radius:1rem;
+    padding:1rem 1.1rem;
+    box-shadow:0 8px 22px rgba(91,23,109,.15);
+}
+.binomial-big-idea .eyebrow{
+    font-size:.68rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#E9D5FF;
+    margin-bottom:.25rem;
+}
+.binomial-big-idea p{font-size:.9rem;line-height:1.55}
+.real-life-check{
+    margin-top:1rem;
+    background:#F0F8FF;
+    border-left:4px solid #0284C7;
+    border-radius:0 .8rem .8rem 0;
+    padding:.85rem;
+}
+.real-life-check-title{font-weight:800;color:#0369A1;font-size:.82rem;margin-bottom:.4rem}
+.real-life-check button{
+    margin-top:.55rem;
+    background:#fff;
+    color:#0369A1;
+    border:1px solid #BAE6FD;
+    border-radius:.65rem;
+    padding:.5rem .75rem;
+    font-size:.75rem;
+    font-weight:800;
+}
+.real-life-answer{
+    display:none;
+    margin-top:.6rem;
+    font-size:.78rem;
+    line-height:1.5;
+    color:#334155;
+}
+.real-life-answer.show{display:block}
+@media(max-width:767px){
+    .application-grid{grid-template-columns:1fr}
+    .real-life-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .application-detail{padding-left:1rem}
+}
+</style>
+
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden">
 
@@ -1230,6 +1383,190 @@
                     <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                 </div>
 
+
+                <!-- WHY BINOMIAL MATTERS IN REAL LIFE -->
+                <div class="real-life-hero">
+                    <span class="text-[10px] font-bold text-[#8610A8] bg-white border border-[#D8B4FE] px-2 py-1 rounded uppercase tracking-wider inline-block mb-3">🌍 Why This Matters</span>
+                    <h3>Why Are We Learning Binomial Distribution?</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        Binomial Distribution is not just another formula in Statistics. It is a way to
+                        <strong>model repeated yes/no outcomes</strong>, measure uncertainty, and support decisions in real situations.
+                        Whenever we repeatedly observe an outcome such as <em>success/failure</em>, <em>respond/not respond</em>,
+                        <em>defective/not defective</em> or <em>pass/fail</em>, a binomial model may be useful if its assumptions are satisfied.
+                    </p>
+
+                    <div class="real-life-flow" aria-label="Binomial problem-solving flow">
+                        <div class="real-life-step">1️⃣ REAL SITUATION<br><span class="font-medium text-gray-500">What is happening?</span></div>
+                        <div class="real-life-step">2️⃣ RECOGNISE<br><span class="font-medium text-gray-500">Is it binomial?</span></div>
+                        <div class="real-life-step">3️⃣ MODEL<br><span class="font-medium text-gray-500">Identify \(n,p,X\)</span></div>
+                        <div class="real-life-step">4️⃣ DECIDE<br><span class="font-medium text-gray-500">What does the probability mean?</span></div>
+                    </div>
+                </div>
+
+                <div class="card-concept">
+                    <div class="card-concept-header">
+                        <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0c2.2 2.7 3.3 6 3.3 10S14.2 19.3 12 22m0-20C9.8 4.7 8.7 8 8.7 12S9.8 19.3 12 22M2 12h20"></path>
+                        </svg>
+                        Real-Life Applications of Binomial Distribution
+                    </div>
+                    <div class="p-4 md:p-5">
+                        <p class="text-sm text-gray-700 mb-4">
+                            Click each situation. Focus first on the <strong>question being answered</strong>, then notice how the real situation becomes a binomial model.
+                        </p>
+
+                        <div class="application-grid">
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">🏭</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Quality Control</span>
+                                        <span class="application-question block">How likely is a production sample to contain too many defective items?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose 20 components are inspected and each component has probability \(p=0.03\) of being defective.<br>
+                                        <strong>\(X\):</strong> number of defective components<br>
+                                        <strong>Model:</strong> \(X \sim B(20,0.03)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The calculated probability can help a quality team judge whether the observed number of defects is unusual and whether further investigation may be needed.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">💊</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Treatment Response</span>
+                                        <span class="application-question block">How many patients in a group may respond to a treatment?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose 12 patients independently receive a treatment and the response probability is \(p=0.70\).<br>
+                                        <strong>\(X\):</strong> number of patients who respond<br>
+                                        <strong>Model:</strong> \(X \sim B(12,0.70)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The model can quantify how likely different response counts are under the stated probability.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">📣</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Marketing Response</span>
+                                        <span class="application-question block">How many customers may respond to a campaign?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose a campaign is sent to 30 independently selected customers and each has probability \(p=0.20\) of responding.<br>
+                                        <strong>\(X\):</strong> number of customers who respond<br>
+                                        <strong>Model:</strong> \(X \sim B(30,0.20)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The probability distribution helps describe the range of response counts that could reasonably occur.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">⚙️</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Reliability & Failure</span>
+                                        <span class="application-question block">How many components may fail during repeated operation?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose 15 similar independent components are used and each has failure probability \(p=0.05\).<br>
+                                        <strong>\(X\):</strong> number of failed components<br>
+                                        <strong>Model:</strong> \(X \sim B(15,0.05)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The model can quantify the probability of seeing zero, one or several failures under the assumed conditions.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">🎓</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Education & Assessment</span>
+                                        <span class="application-question block">How many students may answer a question correctly?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose 25 students independently answer a particular item and each has probability \(p=0.60\) of answering correctly.<br>
+                                        <strong>\(X\):</strong> number of correct responses<br>
+                                        <strong>Model:</strong> \(X \sim B(25,0.60)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The model illustrates how probability can describe the expected spread of correct-response counts across a class.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <button type="button" class="application-trigger" onclick="toggleApplicationCard(this)">
+                                    <span class="application-icon">🛒</span>
+                                    <span class="min-w-0">
+                                        <span class="application-title block">Customer Purchase</span>
+                                        <span class="application-question block">How many visitors may make a purchase?</span>
+                                    </span>
+                                    <span class="application-chevron">⌄</span>
+                                </button>
+                                <div class="application-detail">
+                                    <div class="application-model">
+                                        Suppose 10 independently observed visitors each have purchase probability \(p=0.30\).<br>
+                                        <strong>\(X\):</strong> number of visitors who purchase<br>
+                                        <strong>Model:</strong> \(X \sim B(10,0.30)\)
+                                    </div>
+                                    <div class="application-decision">
+                                        <strong>Why it matters:</strong> The binomial model converts an uncertain customer outcome into probabilities for different purchase counts.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="binomial-big-idea">
+                            <div class="eyebrow">⭐ BIG IDEA</div>
+                            <p>
+                                <strong>Binomial Distribution is a decision-support model for repeated binary outcomes.</strong>
+                                The calculation is important, but the deeper skill is recognising the situation,
+                                defining the random variable, checking the assumptions, and interpreting what the probability means in context.
+                            </p>
+                        </div>
+
+                        <div class="real-life-check">
+                            <div class="real-life-check-title">🧠 Quick Appreciation Check</div>
+                            <p class="text-sm text-gray-700">
+                                A factory inspects 10 items and records whether each item is defective or not. Why might Binomial Distribution be useful?
+                            </p>
+                            <button type="button" onclick="toggleRealLifeAnswer(this)">Show Answer</button>
+                            <div class="real-life-answer">
+                                Because the variable of interest can be the <strong>number of defective items</strong> among a fixed number of inspections.
+                                If the inspections are appropriately independent and the defect probability is approximately constant, the number of defects can be modelled using a binomial distribution.
+                                The resulting probabilities help describe how likely different defect counts are.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-concept">
                     <div class="card-concept-header">
                         <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -1757,6 +2094,25 @@
             // Update ticks
             document.querySelectorAll('.completion-tick').forEach(tick => tick.classList.remove('hidden'));
         }
+
+
+        // ==========================================
+        // REAL-LIFE BINOMIAL APPLICATIONS
+        // ==========================================
+        window.toggleApplicationCard = function(button) {
+            const card = button.closest('.application-card');
+            if (!card) return;
+            card.classList.toggle('open');
+            safeMathJaxTypeset();
+        };
+
+        window.toggleRealLifeAnswer = function(button) {
+            const answer = button.nextElementSibling;
+            if (!answer) return;
+            const isOpen = answer.classList.toggle('show');
+            button.textContent = isOpen ? 'Hide Answer' : 'Show Answer';
+            safeMathJaxTypeset();
+        };
 
         // ==========================================
         // TRY SECTION LOGIC (Interactive Quiz)
