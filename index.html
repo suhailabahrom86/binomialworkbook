@@ -696,6 +696,345 @@
 }
 </style>
 
+
+<style id="binomial-opening-hook">
+.binomial-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#3D0055 0%,#5B176D 48%,#8610A8 100%);
+    color:#fff;
+    box-shadow:0 14px 34px rgba(61,0,85,.18);
+    border:1px solid rgba(255,255,255,.08);
+}
+.binomial-hook-inner{
+    position:relative;
+    z-index:2;
+    padding:1.3rem;
+}
+.binomial-hook-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#4A005E;
+    background:#fff;
+    border-radius:999px;
+    padding:.38rem .65rem;
+    margin-bottom:.8rem;
+}
+.binomial-hook-title{
+    font-size:clamp(1.35rem,3vw,1.8rem);
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:.5rem;
+}
+.binomial-hook-subtitle{
+    color:#F4EAFE;
+    font-size:.9rem;
+    line-height:1.55;
+    max-width:42rem;
+}
+.binomial-hook-scenario{
+    margin-top:1rem;
+    background:rgba(255,255,255,.96);
+    color:#172033;
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:1rem;
+    padding:1rem;
+}
+.binomial-hook-scenario strong{color:#4A005E}
+.binomial-hook-prompt{
+    font-weight:800;
+    color:#3D0055;
+    margin-top:.8rem;
+    margin-bottom:.65rem;
+    font-size:.95rem;
+}
+.binomial-hook-options{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.55rem;
+}
+.binomial-hook-option{
+    border:2px solid #E9D5FF;
+    background:#fff;
+    color:#475569;
+    border-radius:.8rem;
+    padding:.72rem .55rem;
+    font-size:.78rem;
+    font-weight:800;
+    line-height:1.3;
+    cursor:pointer;
+    transition:.2s;
+}
+.binomial-hook-option:hover{
+    border-color:#C084FC;
+    background:#FAF7FF;
+    transform:translateY(-1px);
+}
+.binomial-hook-option.selected{
+    border-color:#8610A8;
+    background:#F4EAFE;
+    color:#4A005E;
+    box-shadow:0 5px 14px rgba(134,16,168,.09);
+}
+.binomial-hook-feedback{
+    display:none;
+    margin-top:.8rem;
+    border-radius:.85rem;
+    padding:.8rem .9rem;
+    font-size:.8rem;
+    line-height:1.5;
+}
+.binomial-hook-feedback.show{display:block}
+.binomial-hook-feedback.neutral{
+    background:#FFF7ED;
+    border:1px solid #FED7AA;
+    color:#9A3412;
+}
+.binomial-hook-curiosity{
+    display:none;
+    margin-top:.8rem;
+    background:#F0F8FF;
+    border-left:4px solid #0284C7;
+    border-radius:0 .85rem .85rem 0;
+    padding:.85rem;
+    color:#334155;
+}
+.binomial-hook-curiosity.show{display:block}
+.binomial-hook-curiosity h4{
+    font-size:.85rem;
+    color:#0369A1;
+    font-weight:800;
+    margin-bottom:.25rem;
+}
+.binomial-hook-cta{
+    display:none;
+    margin-top:.75rem;
+    width:100%;
+    border:0;
+    border-radius:.8rem;
+    padding:.78rem 1rem;
+    background:linear-gradient(135deg,#5B176D,#8610A8);
+    color:#fff;
+    font-weight:800;
+    font-size:.84rem;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(91,23,109,.14);
+}
+.binomial-hook-cta.show{display:block}
+.binomial-hook-remember{
+    display:none;
+    margin-top:.75rem;
+    background:#F0FDF4;
+    border:1px solid #BBF7D0;
+    color:#166534;
+    border-radius:.8rem;
+    padding:.72rem .8rem;
+    font-size:.78rem;
+    line-height:1.45;
+}
+.binomial-hook-remember.show{display:block}
+.binomial-hook-decor{
+    position:absolute;
+    right:-1.4rem;
+    top:-1.4rem;
+    width:9rem;
+    height:9rem;
+    border-radius:999px;
+    background:rgba(255,255,255,.06);
+}
+@media(max-width:640px){
+    .binomial-hook-options{grid-template-columns:1fr}
+}
+</style>
+
+
+<style id="probability-distribution-opening-hook">
+.pd-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#F8F5FF 0%,#F4EAFE 52%,#FFFFFF 100%);
+    border:1px solid #E9D5FF;
+    border-left:5px solid #8610A8;
+    box-shadow:0 10px 28px rgba(91,23,109,.08);
+}
+.pd-hook-inner{padding:1.2rem;position:relative;z-index:2}
+.pd-hook-kicker{
+    display:inline-flex;align-items:center;gap:.35rem;
+    background:#5B176D;color:#fff;border-radius:999px;
+    padding:.38rem .68rem;font-size:.68rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem
+}
+.pd-hook h3{
+    color:#3D0055;font-weight:800;font-size:clamp(1.3rem,3vw,1.75rem);
+    line-height:1.2;margin-bottom:.45rem
+}
+.pd-hook-intro{color:#475569;font-size:.88rem;line-height:1.55}
+.pd-game-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.75rem;margin-top:1rem
+}
+.pd-game-card{
+    background:#fff;border:1px solid #E9D5FF;border-radius:.9rem;padding:.9rem
+}
+.pd-game-label{
+    font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:#8610A8;margin-bottom:.35rem
+}
+.pd-game-card strong{color:#3D0055}
+.pd-choice-title{font-weight:800;color:#3D0055;margin-top:1rem;margin-bottom:.55rem;font-size:.92rem}
+.pd-choice-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem
+}
+.pd-choice-btn{
+    border:2px solid #E9D5FF;background:#fff;color:#475569;border-radius:.8rem;
+    padding:.68rem .55rem;font-size:.78rem;font-weight:800;cursor:pointer;transition:.2s
+}
+.pd-choice-btn:hover{border-color:#C084FC;background:#FAF7FF;transform:translateY(-1px)}
+.pd-choice-btn.selected{
+    border-color:#8610A8;background:#F4EAFE;color:#4A005E;
+    box-shadow:0 5px 14px rgba(134,16,168,.08)
+}
+.pd-hook-feedback{
+    display:none;margin-top:.8rem;background:#FFF7ED;border:1px solid #FED7AA;
+    color:#9A3412;border-radius:.8rem;padding:.8rem;font-size:.8rem;line-height:1.5
+}
+.pd-hook-feedback.show{display:block}
+.pd-hook-reveal{
+    display:none;margin-top:.75rem;background:#F0F8FF;border-left:4px solid #0284C7;
+    border-radius:0 .8rem .8rem 0;padding:.8rem;color:#334155
+}
+.pd-hook-reveal.show{display:block}
+.pd-hook-reveal h4{font-size:.84rem;font-weight:800;color:#0369A1;margin-bottom:.2rem}
+.pd-hook-flow{
+    display:none;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.5rem;margin-top:.75rem
+}
+.pd-hook-flow.show{display:grid}
+.pd-hook-step{
+    background:#fff;border:1px solid #E9D5FF;border-radius:.75rem;padding:.62rem .45rem;
+    text-align:center;color:#5B176D;font-size:.7rem;font-weight:800;line-height:1.35
+}
+.pd-hook-cta{
+    display:none;width:100%;margin-top:.75rem;border:0;border-radius:.8rem;
+    padding:.75rem 1rem;background:linear-gradient(135deg,#5B176D,#8610A8);
+    color:#fff;font-size:.82rem;font-weight:800;cursor:pointer;
+    box-shadow:0 8px 18px rgba(91,23,109,.14)
+}
+.pd-hook-cta.show{display:block}
+@media(max-width:640px){
+    .pd-game-grid,.pd-choice-grid{grid-template-columns:1fr}
+    .pd-hook-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
+
+<style id="mean-variance-opening-hook">
+.mv-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#FFF9F2 0%,#FFF3E6 48%,#FFFFFF 100%);
+    border:1px solid #FED7AA;
+    border-left:5px solid #EA580C;
+    box-shadow:0 10px 28px rgba(154,52,18,.07);
+}
+.mv-hook-inner{padding:1.2rem;position:relative;z-index:2}
+.mv-hook-kicker{
+    display:inline-flex;align-items:center;gap:.35rem;
+    background:#C2410C;color:#fff;border-radius:999px;
+    padding:.38rem .68rem;font-size:.68rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem
+}
+.mv-hook h3{
+    color:#7C2D12;font-weight:800;font-size:clamp(1.3rem,3vw,1.75rem);
+    line-height:1.2;margin-bottom:.45rem
+}
+.mv-hook-intro{color:#475569;font-size:.88rem;line-height:1.55}
+.mv-choice-cards{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.75rem;margin-top:1rem
+}
+.mv-card{
+    background:#fff;border:1px solid #FED7AA;border-radius:.9rem;padding:.9rem
+}
+.mv-card-label{
+    font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:#C2410C;margin-bottom:.35rem
+}
+.mv-card strong{color:#7C2D12}
+.mv-card .mv-small{
+    font-size:.76rem;color:#64748B;line-height:1.5;margin-top:.28rem
+}
+.mv-question{
+    font-weight:800;color:#7C2D12;margin-top:1rem;margin-bottom:.55rem;font-size:.92rem
+}
+.mv-choice-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem
+}
+.mv-choice-btn{
+    border:2px solid #FED7AA;background:#fff;color:#475569;border-radius:.8rem;
+    padding:.68rem .55rem;font-size:.78rem;font-weight:800;cursor:pointer;transition:.2s
+}
+.mv-choice-btn:hover{border-color:#FB923C;background:#FFF7ED;transform:translateY(-1px)}
+.mv-choice-btn.selected{
+    border-color:#EA580C;background:#FFF1E6;color:#9A3412;
+    box-shadow:0 5px 14px rgba(234,88,12,.09)
+}
+.mv-hook-feedback{
+    display:none;margin-top:.8rem;background:#FFF7ED;border:1px solid #FDBA74;
+    color:#9A3412;border-radius:.8rem;padding:.8rem;font-size:.8rem;line-height:1.5
+}
+.mv-hook-feedback.show{display:block}
+.mv-reveal{
+    display:none;margin-top:.75rem;background:#F0FDF4;border-left:4px solid #16A34A;
+    border-radius:0 .8rem .8rem 0;padding:.8rem;color:#334155
+}
+.mv-reveal.show{display:block}
+.mv-reveal h4{font-size:.84rem;font-weight:800;color:#15803D;margin-bottom:.2rem}
+.mv-compare{
+    display:none;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.55rem;margin-top:.75rem
+}
+.mv-compare.show{display:grid}
+.mv-stat{
+    background:#fff;border:1px solid #FED7AA;border-radius:.75rem;
+    padding:.7rem;text-align:center
+}
+.mv-stat-title{
+    font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;
+    font-weight:800;color:#C2410C
+}
+.mv-stat-main{
+    font-size:.9rem;font-weight:800;color:#7C2D12;margin-top:.16rem
+}
+.mv-big-idea{
+    display:none;margin-top:.75rem;background:#F8FAFC;border:1px solid #E2E8F0;
+    border-radius:.8rem;padding:.8rem
+}
+.mv-big-idea.show{display:block}
+.mv-big-idea strong{color:#7C2D12}
+.mv-hook-cta{
+    display:none;width:100%;margin-top:.75rem;border:0;border-radius:.8rem;
+    padding:.75rem 1rem;background:linear-gradient(135deg,#C2410C,#EA580C);
+    color:#fff;font-size:.82rem;font-weight:800;cursor:pointer;
+    box-shadow:0 8px 18px rgba(154,52,18,.14)
+}
+.mv-hook-cta.show{display:block}
+@media(max-width:640px){
+    .mv-choice-cards,.mv-choice-grid,.mv-compare{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden">
 
@@ -761,7 +1100,7 @@
             
             <div class="my-2 border-t border-gray-100"></div>
             
-                        <button id="nav-obt" type="button" onclick="navigateTo(\'sec-obt\'); updateNav(\'nav-obt\')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
+                        <button id="nav-obt" type="button" onclick="navigateTo('sec-obt'); updateNav('nav-obt')" class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm">
                 <svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path>
@@ -874,7 +1213,66 @@
                     <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                 </div>
 
-                <!-- Concept 1 -->
+                
+                <!-- OPENING HOOK: WHY DO WE NEED A PROBABILITY DISTRIBUTION? -->
+                <div class="pd-hook" id="pd-hook">
+                    <div class="pd-hook-inner">
+                        <span class="pd-hook-kicker">🎯 Quick Decision Challenge</span>
+                        <h3>Which Game Would You Choose?</h3>
+                        <p class="pd-hook-intro">
+                            Before learning the definition, imagine that you are choosing between two simple games.
+                            Look at the possible rewards first — but do not calculate anything yet.
+                        </p>
+
+                        <div class="pd-game-grid">
+                            <div class="pd-game-card">
+                                <div class="pd-game-label">Game A</div>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    You could win <strong>RM2</strong>, <strong>RM5</strong> or <strong>RM10</strong>.
+                                </p>
+                            </div>
+                            <div class="pd-game-card">
+                                <div class="pd-game-label">Game B</div>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    You could also win <strong>RM2</strong>, <strong>RM5</strong> or <strong>RM10</strong>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="pd-choice-title">Which game is better?</div>
+
+                        <div class="pd-choice-grid">
+                            <button type="button" class="pd-choice-btn" onclick="choosePDHook(this,'A')">🎮 Game A</button>
+                            <button type="button" class="pd-choice-btn" onclick="choosePDHook(this,'B')">🎮 Game B</button>
+                            <button type="button" class="pd-choice-btn" onclick="choosePDHook(this,'info')">🤔 Not enough information</button>
+                        </div>
+
+                        <div id="pd-hook-feedback" class="pd-hook-feedback">
+                            You know the possible rewards, but that is still not enough to make a good decision.
+                        </div>
+
+                        <div id="pd-hook-reveal" class="pd-hook-reveal">
+                            <h4>💡 What information is missing?</h4>
+                            <p class="text-sm leading-relaxed">
+                                We also need to know <strong>how likely each possible reward is</strong>.
+                                A probability distribution connects every possible value of a random variable with its corresponding probability.
+                            </p>
+                        </div>
+
+                        <div id="pd-hook-flow" class="pd-hook-flow" aria-label="Probability distribution learning flow">
+                            <div class="pd-hook-step">1️⃣ Define \(X\)</div>
+                            <div class="pd-hook-step">2️⃣ List possible values</div>
+                            <div class="pd-hook-step">3️⃣ Assign probabilities</div>
+                            <div class="pd-hook-step">4️⃣ Build the distribution</div>
+                        </div>
+
+                        <button id="pd-hook-cta" type="button" class="pd-hook-cta" onclick="continueFromPDHook()">
+                            🚀 Let’s Learn How Probability Distributions Work
+                        </button>
+                    </div>
+                </div>
+
+<!-- Concept 1 -->
                 <div class="card-concept">
                     <div class="card-concept-header">
                         <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -1164,7 +1562,93 @@
                     <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 </div>
 
-                <div class="card-concept">
+                
+                <!-- OPENING HOOK: WHY MEAN AND VARIANCE MATTER -->
+                <div class="mv-hook" id="mv-hook">
+                    <div class="mv-hook-inner">
+                        <span class="mv-hook-kicker">🎯 Quick Decision Challenge</span>
+                        <h3>Same Average — Same Choice?</h3>
+                        <p class="mv-hook-intro">
+                            Imagine that you can choose one of two reward games.
+                            Both games have the <strong>same average reward</strong>, but they behave very differently.
+                            Which one would you prefer?
+                        </p>
+
+                        <div class="mv-choice-cards">
+                            <div class="mv-card">
+                                <div class="mv-card-label">Game A — Stable</div>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    You receive <strong>RM5 every time</strong>.
+                                </p>
+                                <p class="mv-small">Possible reward: RM5 only.</p>
+                            </div>
+
+                            <div class="mv-card">
+                                <div class="mv-card-label">Game B — Risky</div>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    You receive <strong>RM0</strong> with probability 0.5 or
+                                    <strong>RM10</strong> with probability 0.5.
+                                </p>
+                                <p class="mv-small">Possible rewards: RM0 or RM10.</p>
+                            </div>
+                        </div>
+
+                        <div class="mv-question">
+                            Both games have mean reward RM5. Are they really the same?
+                        </div>
+
+                        <div class="mv-choice-grid">
+                            <button type="button" class="mv-choice-btn" onclick="chooseMVHook(this,'A')">
+                                🛡️ Choose Game A
+                            </button>
+                            <button type="button" class="mv-choice-btn" onclick="chooseMVHook(this,'B')">
+                                🎲 Choose Game B
+                            </button>
+                            <button type="button" class="mv-choice-btn" onclick="chooseMVHook(this,'depends')">
+                                🤔 It depends
+                            </button>
+                        </div>
+
+                        <div id="mv-hook-feedback" class="mv-hook-feedback">
+                            Your choice tells us something important: the average is useful, but it does not describe everything about a distribution.
+                        </div>
+
+                        <div id="mv-hook-reveal" class="mv-reveal">
+                            <h4>💡 Why do these games feel different?</h4>
+                            <p class="text-sm leading-relaxed">
+                                They have the same <strong>mean</strong>, but Game B is much more spread out.
+                                To describe a probability distribution properly, we often need both its
+                                <strong>centre</strong> and its <strong>variability</strong>.
+                            </p>
+                        </div>
+
+                        <div id="mv-hook-compare" class="mv-compare">
+                            <div class="mv-stat">
+                                <div class="mv-stat-title">Game A</div>
+                                <div class="mv-stat-main">Mean = RM5<br>Variance = 0</div>
+                            </div>
+                            <div class="mv-stat">
+                                <div class="mv-stat-title">Game B</div>
+                                <div class="mv-stat-main">Mean = RM5<br>Variance = 25</div>
+                            </div>
+                        </div>
+
+                        <div id="mv-hook-big-idea" class="mv-big-idea">
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                ⭐ <strong>Big idea:</strong>
+                                The <strong>mean / expected value</strong> tells us the long-run centre,
+                                while the <strong>variance</strong> tells us how much the possible values
+                                spread around that centre.
+                            </p>
+                        </div>
+
+                        <button id="mv-hook-cta" type="button" class="mv-hook-cta" onclick="continueFromMVHook()">
+                            🚀 Let’s Learn How to Measure Centre and Variability
+                        </button>
+                    </div>
+                </div>
+
+<div class="card-concept">
                     <div class="card-concept-header">
                         <svg class="w-5 h-5 mr-2 text-[#8610A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                         Important Formulas
@@ -1384,7 +1868,61 @@
                 </div>
 
 
-                <!-- WHY BINOMIAL MATTERS IN REAL LIFE -->
+                
+                <!-- OPENING HOOK: CREATE A NEED FOR BINOMIAL DISTRIBUTION -->
+                <div class="binomial-hook" id="binomial-hook">
+                    <div class="binomial-hook-decor" aria-hidden="true"></div>
+                    <div class="binomial-hook-inner">
+                        <span class="binomial-hook-kicker">🎯 Decision Challenge</span>
+                        <h3 class="binomial-hook-title">Would You Be Worried?</h3>
+                        <p class="binomial-hook-subtitle">
+                            Before learning any formula, make a judgement from a real situation. There is no penalty for your choice — the purpose is to make you think.
+                        </p>
+
+                        <div class="binomial-hook-scenario">
+                            <p class="text-sm leading-relaxed">
+                                🏭 A factory normally produces a defective item with probability <strong>0.05</strong>.
+                                Today, a quality manager randomly inspects <strong>10 items</strong> and finds <strong>3 defective items</strong>.
+                            </p>
+
+                            <div class="binomial-hook-prompt">What would you conclude?</div>
+
+                            <div class="binomial-hook-options">
+                                <button type="button" class="binomial-hook-option" onclick="chooseBinomialHook(this,'normal')">
+                                    🟢 No<br><span class="font-medium">This can happen normally.</span>
+                                </button>
+                                <button type="button" class="binomial-hook-option" onclick="chooseBinomialHook(this,'unsure')">
+                                    🟠 Not sure<br><span class="font-medium">I need more information.</span>
+                                </button>
+                                <button type="button" class="binomial-hook-option" onclick="chooseBinomialHook(this,'worried')">
+                                    🔴 Yes<br><span class="font-medium">This seems unusually high.</span>
+                                </button>
+                            </div>
+
+                            <div id="binomial-hook-feedback" class="binomial-hook-feedback neutral">
+                                Good — you have made a prediction. But a judgement alone does not tell us <strong>how unusual</strong> 3 defective items really are.
+                            </div>
+
+                            <div id="binomial-hook-curiosity" class="binomial-hook-curiosity">
+                                <h4>🤔 So how can we know?</h4>
+                                <p class="text-sm leading-relaxed">
+                                    We need a way to calculate the probability of getting 3 or more defective items out of 10 when the defect probability is 0.05.
+                                    <strong>This is exactly the type of uncertainty that Binomial Distribution can model.</strong>
+                                </p>
+                            </div>
+
+                            <button id="binomial-hook-cta" type="button" class="binomial-hook-cta" onclick="continueFromBinomialHook()">
+                                🚀 Let’s Find Out Why Binomial Distribution Matters
+                            </button>
+
+                            <div id="binomial-hook-remember" class="binomial-hook-remember">
+                                📌 Remember your first judgement. After learning the topic, you should be able to return to this situation and make a more informed decision using probability rather than intuition alone.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!-- WHY BINOMIAL MATTERS IN REAL LIFE -->
                 <div class="real-life-hero">
                     <span class="text-[10px] font-bold text-[#8610A8] bg-white border border-[#D8B4FE] px-2 py-1 rounded uppercase tracking-wider inline-block mb-3">🌍 Why This Matters</span>
                     <h3>Why Are We Learning Binomial Distribution?</h3>
@@ -2013,6 +2551,85 @@
             }
         }
 
+
+        // ==========================================
+        // 3.1 PROBABILITY DISTRIBUTION OPENING HOOK
+        // ==========================================
+        window.choosePDHook = function(button, choice) {
+            document.querySelectorAll('.pd-choice-btn').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('pd-hook-feedback');
+            const reveal = document.getElementById('pd-hook-reveal');
+            const flow = document.getElementById('pd-hook-flow');
+            const cta = document.getElementById('pd-hook-cta');
+
+            if (feedback) {
+                feedback.classList.add('show');
+                if (choice === 'info') {
+                    feedback.innerHTML = 'Exactly. <strong>Possible values alone are not enough.</strong> We also need the probability attached to each value.';
+                } else {
+                    feedback.innerHTML = 'That is a reasonable first guess, but there is a problem: <strong>both games have the same possible rewards.</strong> We still do not know how likely each reward is.';
+                }
+            }
+
+            if (reveal) reveal.classList.add('show');
+            if (flow) flow.classList.add('show');
+            if (cta) cta.classList.add('show');
+            safeMathJaxTypeset();
+        };
+
+        window.continueFromPDHook = function() {
+            const target = document.querySelector('#sec-3-1 .card-concept');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            safeMathJaxTypeset();
+        };
+
+
+
+        // ==========================================
+        // 3.2 MEAN & VARIANCE OPENING HOOK
+        // ==========================================
+        window.chooseMVHook = function(button, choice) {
+            document.querySelectorAll('.mv-choice-btn').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('mv-hook-feedback');
+            const reveal = document.getElementById('mv-hook-reveal');
+            const compare = document.getElementById('mv-hook-compare');
+            const bigIdea = document.getElementById('mv-hook-big-idea');
+            const cta = document.getElementById('mv-hook-cta');
+
+            if (feedback) {
+                feedback.classList.add('show');
+
+                if (choice === 'A') {
+                    feedback.innerHTML =
+                        'You chose the more predictable option. That suggests that <strong>variability matters</strong>, not just the average.';
+                } else if (choice === 'B') {
+                    feedback.innerHTML =
+                        'You chose the riskier option. Even though the mean is the same, you are willing to accept <strong>greater variability</strong>.';
+                } else {
+                    feedback.innerHTML =
+                        'Exactly — the “better” choice can depend on how much variability or risk a person is willing to accept.';
+                }
+            }
+
+            if (reveal) reveal.classList.add('show');
+            if (compare) compare.classList.add('show');
+            if (bigIdea) bigIdea.classList.add('show');
+            if (cta) cta.classList.add('show');
+
+            safeMathJaxTypeset();
+        };
+
+        window.continueFromMVHook = function() {
+            const target = document.querySelector('#sec-3-2 .card-concept');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            safeMathJaxTypeset();
+        };
+
+
         // Progress tracking
         let visitedSections = new Set(['sec-start']);
         const allSections = ['sec-start', 'sec-3-1', 'sec-3-2', 'sec-3-3', 'sec-try', 'sec-check'];
@@ -2094,6 +2711,42 @@
             // Update ticks
             document.querySelectorAll('.completion-tick').forEach(tick => tick.classList.remove('hidden'));
         }
+
+
+
+        // ==========================================
+        // BINOMIAL OPENING HOOK
+        // ==========================================
+        window.chooseBinomialHook = function(button, choice) {
+            document.querySelectorAll('.binomial-hook-option').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('binomial-hook-feedback');
+            const curiosity = document.getElementById('binomial-hook-curiosity');
+            const cta = document.getElementById('binomial-hook-cta');
+            const remember = document.getElementById('binomial-hook-remember');
+
+            if (feedback) {
+                feedback.classList.add('show');
+                if (choice === 'unsure') {
+                    feedback.innerHTML = 'Good thinking. <strong>“I need more information”</strong> is a sensible statistical response because we need to quantify how unusual the result is.';
+                } else {
+                    feedback.innerHTML = 'Good — you have made a prediction. But a judgement alone does not tell us <strong>how unusual</strong> 3 defective items really are.';
+                }
+            }
+
+            if (curiosity) curiosity.classList.add('show');
+            if (cta) cta.classList.add('show');
+            if (remember) remember.classList.add('show');
+        };
+
+        window.continueFromBinomialHook = function() {
+            const target = document.querySelector('#sec-3-3 .real-life-hero');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            safeMathJaxTypeset();
+        };
 
 
         // ==========================================
